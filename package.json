@@ -1,0 +1,24 @@
+{
+  "name": "postmates",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/app.js"
+  },
+  "author": "Mikel Severson",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.4.4",
+    "angular-animate": "^1.4.4",
+    "angular-aria": "^1.4.4",
+    "angular-material": "^0.10.1",
+    "angular-route": "^1.4.4",
+    "express": "^4.13.3",
+    "grunt": "^0.4.5",
+    "grunt-contrib-copy": "^0.8.1",
+    "grunt-contrib-uglify": "^0.9.1",
+    "path": "^0.11.14"
+  }
+}
