@@ -6,17 +6,15 @@
                 <div ng-if="delivery.courier == undefined">
                     {{delivery.id}} - Pending driver assignment.
                 </div>
-                <div ng-if="delivery.courier">
-                    <img ng-src="{{delivery.courier.img_href}}" alt="image of {{delivery.courier.name}}" class="md-avatar">
-                    <div class="md-list-item-text">
-                        <h3>{{delivery.id}}</h3>
-                        <h4>{{delivery.courier.name}}</h4>
-                        <p>
-                            {{delivery.manifest.description}}
-                        </p>
-                    </div>
-                    <md-divider inset></md-divider>
+                <img ng-src="{{delivery.courier.img_href}}" alt="image of {{delivery.courier.name}}" class="md-avatar">
+                <div class="md-list-item-text">
+                    <h3>{{delivery.id}}</h3>
+                    <h4>{{delivery.courier.name}}</h4>
+                    <p>
+                        {{delivery.manifest.description}}
+                    </p>
                 </div>
+                <md-divider inset></md-divider>
             </md-list-item>
         </md-list>
 
