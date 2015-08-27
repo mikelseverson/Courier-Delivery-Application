@@ -24,9 +24,9 @@ router.post("/create", function(req, res) {
         pickup_business_name: "Optional Pickup Business Name, Inc.",
         pickup_notes: "Optional note that this is Invoice #123",
 
-        dropoff_name: "Alice",
+        dropoff_name: req.body.dropoff_name,
         dropoff_address: req.body.dropoff_address,
-        dropoff_phone_number: "415-555-1234",
+        dropoff_phone_number: req.body.dropoff_phone_number,
         dropoff_business_name: "Optional Dropoff Business Name, Inc.",
         dropoff_notes: "Optional note to ring the bell",
 

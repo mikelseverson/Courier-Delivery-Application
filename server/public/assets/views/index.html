@@ -30,7 +30,7 @@
             <a href="#home"><h1 class="md-title">Home</h1></a>
             <div ng-repeat="category in categories">
                    <p>
-                       <a class="md-title" ng-href="#/category/{{category}}">{{category}}</a>
+                       <a ng-click="toggleSidenav('left')" class="md-title" ng-href="#/category/{{category}}">{{category}}</a>
                    </p>
             </div>
             <a href="#about"><h1 class="md-title">About</h1></a>

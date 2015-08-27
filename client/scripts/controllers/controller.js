@@ -10,7 +10,6 @@ myApp.controller('ProductController',['$scope', '$routeParams', '$http', functio
     $scope.product = $routeParams.product;
     $scope.category = $routeParams.category;
     $http.get("/product/" + $routeParams.product).then(function(res) {
-        console.log(res.data[0]);
         $scope.product = res.data[0];
     });
 }]);
