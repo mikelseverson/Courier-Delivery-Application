@@ -218,6 +218,7 @@ section > * {
 
 a {
     text-decoration: none;
+    outline: none;
     color: #0B0080;
 }
 md-sidenav {
