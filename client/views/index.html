@@ -29,12 +29,10 @@
                     md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
             <a href="#home"><h1 class="md-title">Home</h1></a>
             <div ng-repeat="category in categories">
-                   <p ng-click="toggleSidenav('left')">
-                       <a class="md-title" ng-href="#/category/{{category}}">{{category}}</a>
-                   </p>
+                <a ng-click="toggleSidenav('left')" ng-href="#/category/{{category}}"><h1 class="md-title">{{category}}</h1></a>
             </div>
-            <a href="#about"><h1 class="md-title">About</h1></a>
-            <a href="#admin"><h1 class="md-title">Admin</h1></a>
+            <a ng-click="toggleSidenav('left')" href="#about"><h1 class="md-title">About</h1></a>
+            <a ng-click="toggleSidenav('left')" href="#admin"><h1 class="md-title">Admin</h1></a>
         </md-sidenav>
 
         <!--Main Content-->
