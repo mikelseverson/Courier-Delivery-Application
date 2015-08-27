@@ -29,9 +29,7 @@
                     md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
             <a href="#home"><h1 class="md-title">Home</h1></a>
             <div ng-repeat="category in categories">
-                <md-button ng-click="close()" class="md-primary" hide-gt-md>
                     <a class="md-title" ng-href="#/category/{{category}}">{{category}}</a>
-                    </md-button>
             </div>
             <a href="#about"><h1 class="md-title">About</h1></a>
             <a href="#admin"><h1 class="md-title">Admin</h1></a>
