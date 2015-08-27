@@ -48,7 +48,7 @@ myApp.controller('UserController', ['$scope', '$http', function($scope, $http) {
 
 myApp.controller('AdminController', ['$scope', '$http', function($scope, $http) {
     $http.get("/postmates/deliveries").then(function(res) {
-        console.log(res.data);
+        console.log(res.data);ç
         $scope.delivery = res.data;
     });
     $scope.newProduct = function() {
