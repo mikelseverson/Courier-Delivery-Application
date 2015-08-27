@@ -1,15 +1,14 @@
 <md-content layout="column" flex class="md-padding">
     <h1 class="md-title">Admin Panel</h1>
-    <h2 class="md-title">Active Deliveries</h2>
         <md-list>
+            <md-subheader class="md-no-sticky">Active Deliveries</md-subheader>
             <md-list-item class="md-3-line" ng-repeat="delivery in delivery.data">
-                <img ng-src="{{delivery.courier.img_href}}" alt="image of {{delivery.courier.name}}" class="md-avatar">
+                <img ng-if="delivery.courier.img_href != undefined" ng-src="{{delivery.courier.img_href}}" alt="image of {{delivery.courier.name}}" class="md-avatar">
                 <div class="md-list-item-text">
                     <h3>{{delivery.id}}</h3>
                     <h4>{{delivery.courier.name}}</h4>
-                    <p>
-                        {{delivery.manifest.description}}
-                    </p>
+                    <h4 ng-if="delivery.courier.name == undefined">Pending...</h4>
+                    <p>{{delivery.manifest.description}}</p>
                 </div>
                 <md-divider inset></md-divider>
             </md-list-item>
