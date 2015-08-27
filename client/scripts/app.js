@@ -10,19 +10,15 @@ myApp.config(['$routeProvider', function($routeProvider){
             templateUrl: "/assets/views/routes/category.html",
             controller: "CategoryController"
         }).
-        when('/category/:category/product/:product', { //view product
+        when('/category/:category/product/:product', {
             templateUrl: "/assets/views/routes/product.html",
             controller: "ProductController"
         }).
         when('/about', {
             templateUrl: "/assets/views/routes/about.html"
         }).
-        when('/vendor', {
-            templateUrl: "/assets/views/routes/vendor-panel.html",
-            controller: 'UserController'
-        }).
-        when('/vendor-login', {
-            templateUrl: "/assets/views/routes/vendor-login.html"
+        when('/admin-login', {
+            templateUrl: "/assets/views/routes/admin-login.html"
         }).
         when('/register', {
             templateUrl: "/assets/views/routes/register.html"
