@@ -1,0 +1,11 @@
+<md-content layout="column" flex class="md-padding">
+
+    <h1 class="md-title">{{category}}</h1>
+    <ul>
+        <li ng-repeat="product in products">
+            <a ng-href="#/category/{{category}}/product/{{product._id}}"> <p class="md-body-1">{{product.name}}</p></a>
+        </li>
+    </ul>
+
+
+</md-content>

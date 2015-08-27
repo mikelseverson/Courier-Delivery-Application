@@ -1,0 +1,29 @@
+<md-content layout="column" flex class="md-padding">
+    <h1 class="md-title">Admin Panel</h1>
+    <h2 class="md-title">Active Deliveries</h2>
+    <ul ng-repeat="delivery in delivery.data">
+
+        <li ng-if="delivery.courier == undefined">
+            {{delivery.id}} - Pending driver assignment.
+        </li>
+
+        <li ng-if="delivery.courier">
+            {{delivery.id}} -  has been assigned to {{delivery.courier.name}}
+
+            <!--<img class="driver-img" ng-src="{{delivery.courier.img_href}}"> -->
+        </li>
+    </ul>
+    <div id="new-product">
+        <p>Add Product</p>
+        <div>
+            <input ng-model="category" placeholder="category">
+            <input ng-model="name" placeholder="name">
+            <input ng-model="description" placeholder="description">
+            <input ng-model="price" placeholder="price">
+        </div>
+        <div class="button raised" ng-click="newProduct()">
+            <div class="center" fit>Create</div>
+            <paper-ripple fit></paper-ripple>
+        </div>
+    </div>
+</md-content>

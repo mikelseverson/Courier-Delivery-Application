@@ -1,0 +1,22 @@
+<div ng-controller="QuoteController">
+    <md-content layout="column" flex class="md-padding">
+
+        <h1 class="md-title">Pickup Address: </h1>
+        <md-input-container md-no-float>
+            <md-icon md-svg-src="https://raw.githubusercontent.com/angular/material/master/docs/app/img/icons/ic_place_24px.svg" style="display:inline-block;"></md-icon>
+            <input ng-model="delivery.origin" type="text" placeholder="Address" >
+        </md-input-container>
+
+        <h1 class="md-title">Dropoff Address: </h1>
+        <md-input-container md-no-float>
+            <md-icon md-svg-src="https://raw.githubusercontent.com/angular/material/master/docs/app/img/icons/ic_place_24px.svg" style="display:inline-block;"></md-icon>
+            <input ng-model="delivery.destination" type="text" placeholder="Address" >
+        </md-input-container>
+
+        <div class="button raised" ng-click="send(delivery)">
+            <div class="center" fit>What's the cost?</div>
+            <paper-ripple fit></paper-ripple>
+        </div>
+
+    </md-content>
+</div>
