@@ -1,15 +1,14 @@
 var express = require('express');
-var router = express.Router();
 var path = require('path');
 var Postmates = require('postmates');
 var postmates = new Postmates('cus_KKTBUzym9jC16k', '6854a484-6226-43b8-ab7f-0890841bee0a');
 
+var router = express.Router();
 
 //Receive Postmates Quote Price
 router.post("/query", function(request, response) {
     postmates.quote(request.body, function(err, res) {
         if(res.body !== undefined) response.send(res.body);
-
     });
 });
 
