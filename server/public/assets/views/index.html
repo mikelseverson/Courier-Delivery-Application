@@ -27,9 +27,9 @@
         <!--Navigation-->
         <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2"
                     md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
-            <a href="#home"><h1 class="md-title">Home</h1></a>
+            <a ng-click="toggleSidenav('left')" href="#home"><h1 class="md-title">Home</h1></a>
             <div ng-repeat="category in categories">
-                <a ng-click="toggleSidenav('left')" ng-href="#/category/{{category}}"><h1 class="md-title">{{category}}</h1></a>
+                <a ng-click="toggleSidenav('left')" ng-href="#/category/{{category | lowercase}}"><h1 class="md-title">{{category}}</h1></a>
             </div>
             <a ng-click="toggleSidenav('left')" href="#about"><h1 class="md-title">About</h1></a>
             <a ng-click="toggleSidenav('left')" href="#admin"><h1 class="md-title">Admin</h1></a>
