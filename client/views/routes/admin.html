@@ -3,9 +3,6 @@
     <h2 class="md-title">Active Deliveries</h2>
         <md-list>
             <md-list-item class="md-3-line" ng-repeat="delivery in delivery.data">
-                <div ng-if="delivery.courier == undefined">
-                    {{delivery.id}} - Pending driver assignment.
-                </div>
                 <img ng-src="{{delivery.courier.img_href}}" alt="image of {{delivery.courier.name}}" class="md-avatar">
                 <div class="md-list-item-text">
                     <h3>{{delivery.id}}</h3>
