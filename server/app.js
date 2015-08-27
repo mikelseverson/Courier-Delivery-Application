@@ -13,7 +13,7 @@ var localStrategy = require('passport-local').Strategy;
 
 //MongoDB setup
 var User = require('./models/user');
-var mongoURI = process.env.MONGOLAB_URI | "mongodb://localhost:27017/yourmarket";
+var mongoURI = process.env.MONGOLAB_URI || "mongodb://localhost:27017/yourmarket";
 var mongoDB = mongoose.connect(mongoURI).connection;
 
 mongoDB.on('error', function(err){
