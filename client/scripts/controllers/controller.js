@@ -18,10 +18,11 @@ myApp.controller("QuoteController", ["$scope", "$http", function($scope, $http) 
     var pickupAddress = "310 Hennepin Ave E, Minneapolis, MN 55414";
     var dropoffAddress = "";
     $scope.getQuote = function(delivery) {
-        dropoffAddress = delivery.destination;
         $http.post("/postmates/query", {
             dropoff_address: delivery.destination,
-            pickup_address: pickupAddress
+            pickup_address: pickupAddress,
+            dropoff_phone_number: delivery.phone_number,
+            dropoff_name: delivery.dropoff_name
         }).then(function(response) {
             console.log(response.data);
             $scope.quote = response.data;
