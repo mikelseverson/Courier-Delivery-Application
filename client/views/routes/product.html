@@ -4,37 +4,33 @@
     <p class="md-body-2">{{product.desc}}</p>
 
     <div ng-controller="QuoteController">
+         <h1 class="md-title">Delivery:</h1>
+        <md-input-container>
+            <md-icon md-svg-src="/assets/images/ic_place_24px.svg"></md-icon>
+            <input ng-model="delivery.dropoff_name" type="text" placeholder="Name" >
+        </md-input-container>
+        <md-input-container>
+            <md-icon md-svg-src="/assets/images/ic_place_24px.svg"></md-icon>
+            <input ng-model="delivery.destination" type="text" placeholder="Address" >
+        </md-input-container>
+        <md-input-container>
+            <md-icon md-svg-src="/assets/images/ic_place_24px.svg"></md-icon>
+            <input ng-model="delivery.phone_number" type="text" placeholder="Phone Number" >
+        </md-input-container>
+        <div>
+            <div class="button raised" ng-click="getQuote(delivery)">
+                <div class="center" fit>Create Quote</div>
+                <paper-ripple fit></paper-ripple></div>
+        </div>
 
-        <md-content layout="column" flex class="md-padding">
-            <h1 class="md-title">Delivery: </h1>
-            <md-input-container>
-                <md-icon md-svg-src="/assets/images/ic_place_24px.svg"></md-icon>
-                <input ng-model="delivery.dropoff_name" type="text" placeholder="Name" >
-            </md-input-container>
-            <md-input-container>
-                <md-icon md-svg-src="/assets/images/ic_place_24px.svg"></md-icon>
-                <input ng-model="delivery.destination" type="text" placeholder="Address" >
-            </md-input-container>
-            <md-input-container>
-                <md-icon md-svg-src="/assets/images/ic_place_24px.svg"></md-icon>
-                <input ng-model="delivery.phone_number" type="text" placeholder="Phone Number" >
-            </md-input-container>
-
-            <div>
-                <div class="button raised" ng-click="getQuote(delivery)">
-                    <div class="center" fit>Create Quote</div>
-                    <paper-ripple fit></paper-ripple></div>
+        <div id="checkout">
+            <p>Price: {{product.price | currency}}</p>
+            <p>Delivery:<span ng-if="quote.fee == null"> ----</span> {{quote.fee | currency}}</p></span>
+            <p>Total: {{product.price + quote.fee | currency}} </p>
+            <div class="button raised" ng-click="sendOrder(quote.id)">
+                <div class="center" fit>Send</div>
+                <paper-ripple fit></paper-ripple>
             </div>
-
-            <div id="checkout">
-                <p>Price: {{product.price | currency}}</p>
-                <p>Delivery:<span ng-if="quote.fee == null"> ----</span> {{quote.fee | currency}}</p></span>
-                <p>Total: {{product.price + quote.fee | currency}} </p>
-                <div class="button raised" ng-click="sendOrder(quote.id)">
-                    <div class="center" fit>Send</div>
-                    <paper-ripple fit></paper-ripple>
-                </div>
-            </div>
-        </md-content>
+        </div>
     </div>
 </md-content>
