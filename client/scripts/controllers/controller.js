@@ -16,22 +16,31 @@ myApp.controller('ProductController',['$scope', '$routeParams', '$http', functio
 
 myApp.controller("QuoteController", ["$scope", "$http", function($scope, $http) {
     var pickupAddress = "310 Hennepin Ave E, Minneapolis, MN 55414";
-    var dropoffAddress = "";
     $scope.getQuote = function(delivery) {
         $http.post("/postmates/query", {
-            dropoff_address: delivery.destination,
-            pickup_address: pickupAddress,
-            dropoff_phone_number: delivery.phone_number,
-            dropoff_name: delivery.dropoff_name
+            dropoff_address: $scope.delivery.destination,
+            pickup_address: pickupAddress
         }).then(function(response) {
             console.log(response.data);
             $scope.quote = response.data;
             $scope.quote.fee /= 100;
         })
     };
+    //$scope.cancel = function(e) {
+    //    if (e.keyCode == 27) {
+    //        $scope.userForm.userName.$rollbackViewValue();
+    //    }
+    //};
+
     $scope.sendOrder = function(quoteID) {
         console.log("Attempting to create delivery from order " + quoteID)
-        $http.post("/postmates/create", {quote : quoteID, pickup_address: pickupAddress, dropoff_address: dropoffAddress})
+        $http.post("/postmates/create", {quote : quoteID,
+            pickup_address: pickupAddress,
+            dropoff_address: $scope.delivery.destination,
+            dropoff_phone_number: $scope.delivery.phone_number,
+            dropoff_name: $scope.delivery.dropoff_name,
+            dropoff_business_name: $scope.dropoff_business_name,
+            dropoff_notes: $scope.dropoff_notes})
             .then(function(response) {
             $scope.orderDetails = response.data;
             console.log(response.data);

@@ -1,27 +1,35 @@
+<md-toolbar>
+    <div class="md-toolbar-tools">
+        <h2 class="md-flex">{{product.name}} - {{product.price}}</h2>
+    </div>
+</md-toolbar>
 <md-content layout="column" flex class="md-padding">
     <!--Product Information-->
-    <h1 class="md-title">{{product.name}} - {{product.price}}</h1>
     <p class="md-body-2">{{product.desc}}</p>
 
     <div ng-controller="QuoteController">
          <h1 class="md-title">Delivery:</h1>
         <md-input-container>
             <md-icon md-svg-src="/assets/images/ic_place_24px.svg"></md-icon>
+            <input ng-model="delivery.destination" type="text" placeholder="Address" ng-model-options="{ updateOn: 'blur' }"
+                   ng-keyup="cancel($event)" ng-change='getQuote(delivery)'>
+        </md-input-container>
+        <md-input-container>
+            <md-icon md-svg-src="/assets/images/ic_person_24px.svg"></md-icon>
             <input ng-model="delivery.dropoff_name" type="text" placeholder="Name" >
         </md-input-container>
+        <!--<md-input-container>-->
+            <!--<md-icon md-svg-src="/assets/images/ic_person_24px.svg"></md-icon>-->
+            <!--<input ng-model="delivery.dropoff_business_name" type="text" placeholder="Business Name (optional)" >-->
+        <!--</md-input-container>-->
         <md-input-container>
-            <md-icon md-svg-src="/assets/images/ic_place_24px.svg"></md-icon>
-            <input ng-model="delivery.destination" type="text" placeholder="Address" >
-        </md-input-container>
-        <md-input-container>
-            <md-icon md-svg-src="/assets/images/ic_place_24px.svg"></md-icon>
+            <md-icon md-svg-src="/assets/images/ic_phone_24px.svg"></md-icon>
             <input ng-model="delivery.phone_number" type="text" placeholder="Phone Number" >
         </md-input-container>
-        <div>
-            <div class="button raised" ng-click="getQuote(delivery)">
-                <div class="center" fit>Create Quote</div>
-                <paper-ripple fit></paper-ripple></div>
-        </div>
+        <md-input-container>
+            <md-icon md-svg-src="/assets/images/notes_24px.svg"></md-icon>
+            <input ng-model="delivery.dropoff_notes" type="text" placeholder="Dropoff Notes (optional)" >
+        </md-input-container>
 
         <div id="checkout">
             <p>Price: {{product.price | currency}}</p>

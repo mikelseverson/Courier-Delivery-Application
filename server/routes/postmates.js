@@ -26,8 +26,8 @@ router.post("/create", function(req, res) {
         dropoff_name: req.body.dropoff_name,
         dropoff_address: req.body.dropoff_address,
         dropoff_phone_number: req.body.dropoff_phone_number,
-        dropoff_business_name: "Optional Dropoff Business Name, Inc.",
-        dropoff_notes: "Optional note to ring the bell",
+        dropoff_business_name: req.body.dropoff_business_name,
+        dropoff_notes: req.body.dropoff_notes,
 
         quote_id: req.body.quote
     }, function(err, response) {
