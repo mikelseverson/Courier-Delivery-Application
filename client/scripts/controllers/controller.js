@@ -55,11 +55,15 @@ myApp.controller('UserController', ['$scope', '$http', function($scope, $http) {
     })
 }]);
 
-myApp.controller('AdminController', ['$scope', '$http', function($scope, $http) {
-    $http.get("/postmates/deliveries").then(function(res) {
-        console.log(res.data);
-        $scope.delivery = res.data;
-    });
+myApp.controller('AdminController', ['$scope', '$http','$interval', function($scope, $http, $interval) {
+
+    $interval(function() {
+        $http.get("/postmates/deliveries").then(function(res) {
+                console.log(res.data);
+                $scope.delivery = res.data;
+            })
+    }, 5000);
+
     $scope.newProduct = function() {
         $http.post("/create-product", {
             category : $scope.category,

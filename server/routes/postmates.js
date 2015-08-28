@@ -38,7 +38,7 @@ router.post("/create", function(req, res) {
 
 //Grab a list of all active deliveries
 router.get("/deliveries", function(req, res) {
-    postmates.list('ongoing', function(err, response) {
+    postmates.list(function(err, response) {
         if(response.body == undefined) {
             res.send("error");
         }

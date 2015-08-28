@@ -1,16 +1,13 @@
 <md-toolbar>
     <div class="md-toolbar-tools">
-        <md-button ng-click="toggleSidenav('left')" hide-gt-sm class="md-icon-button">
-            <md-icon aria-label="Menu" md-svg-icon="/assets/images/menu.svg"></md-icon>
-        </md-button>
         <h2 class="md-flex">{{category}}</h2>
     </div>
 </md-toolbar>
-<md-content layout-padding style="height: 600px; padding: 24px;">
+
+<md-content>
     <ul>
         <li ng-repeat="product in products">
             <a ng-href="#/category/{{category}}/product/{{product._id}}"> <p class="md-body-1">{{product.name}}</p></a>
         </li>
     </ul>
-
 </md-content>
