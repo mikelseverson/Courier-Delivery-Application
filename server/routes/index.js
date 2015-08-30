@@ -28,6 +28,7 @@ router.get("/:category/products", function(req, res) {
 //Get all unique categories
 router.get("/get-categories", function(req, res) {
     Products.collection.distinct('category', function(error, results){
+        console.log("request for categories")
         res.send(results);
     });
 });

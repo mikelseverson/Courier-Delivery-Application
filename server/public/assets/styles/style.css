@@ -240,3 +240,6 @@ md-sidenav.md-locked-open {
 .space {
     height: 10px;
 }
+md-content.md-default-theme {
+    background-color: #eee;
+}

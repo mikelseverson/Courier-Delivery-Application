@@ -26,12 +26,6 @@ myApp.controller("QuoteController", ["$scope", "$http", function($scope, $http) 
             $scope.quote.fee /= 100;
         })
     };
-    //$scope.cancel = function(e) {
-    //    if (e.keyCode == 27) {
-    //        $scope.userForm.userName.$rollbackViewValue();
-    //    }
-    //};
-
     $scope.sendOrder = function(quoteID) {
         console.log("Attempting to create delivery from order " + quoteID)
         $http.post("/postmates/create", {quote : quoteID,
@@ -62,7 +56,7 @@ myApp.controller('AdminController', ['$scope', '$http','$interval', function($sc
                 console.log(res.data);
                 $scope.delivery = res.data;
             })
-    }, 5000);
+    }, 10000);
 
     $scope.newProduct = function() {
         $http.post("/create-product", {
@@ -71,9 +65,9 @@ myApp.controller('AdminController', ['$scope', '$http','$interval', function($sc
             price : $scope.price,
             name : $scope.name })
     };
-    $scope.getCategories = function() {
-        $http.get("/categories").then(function(res) {
-            console.log(res);
-        })
-    };
+    //$scope.getCategories = function() {
+    //    $http.get("/categories").then(function(res) {
+    //        console.log(res);
+    //    })
+    //};
 }]);
