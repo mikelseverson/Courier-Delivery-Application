@@ -270,6 +270,6 @@ md-content.md-default-theme {
     background-color: white;
 }
 .product-img {
-    max-height: 300px
+    max-height: 300px;
     max-width: 100%;
 }
