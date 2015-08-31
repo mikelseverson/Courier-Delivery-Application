@@ -226,9 +226,9 @@ md-sidenav {
 }
 
 md-sidenav.md-locked-open {
-    width: 225px;
-    max-width: 225px;
-    min-width: 225px;
+    width: 210px;
+    max-width: 210px;
+    min-width: 210px;
 }
 #new-product {
     width: 300px;
