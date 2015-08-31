@@ -271,4 +271,5 @@ md-content.md-default-theme {
 }
 .product-img {
     max-height: 300px
+    max-width: 100%;
 }
