@@ -20,7 +20,7 @@
         <md-card-content ng-controller="QuoteController">
             <md-input-container>
                 <md-icon md-svg-src="/assets/images/ic_place_24px.svg"></md-icon>
-                <input ng-model="delivery.destination" type="text" placeholder="Address" ng-model-options="{ updateOn: 'blur' }"
+                <input ng-model="delivery.destination" type="text" placeholder="Minneapolis Address" ng-model-options="{ updateOn: 'blur' }"
                        ng-keyup="cancel($event)" ng-change='getQuote(delivery)'>
             </md-input-container>
             <md-input-container>
