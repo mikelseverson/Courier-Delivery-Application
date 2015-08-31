@@ -1,3 +1,4 @@
+//Dependencies
 var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
@@ -7,7 +8,6 @@ var index = require('./routes/index');
 var postmates = require('./routes/postmates');
 var product = require('./routes/product');
 var category = require('./routes/category');
-
 
 //Passport Setup
 var passport = require('passport');
@@ -47,12 +47,10 @@ passport.deserializeUser(function(id, done) {
         done(null, user);
     });
 });
-
 passport.use('local', new localStrategy({
         passReqToCallback : true,
         usernameField: 'username'
-    },
-    function(req, username, password, done){
+    }, function(req, username, password, done){
         User.findOne({ username: username }, function(err, user) { //finds user by unique username
             if (err) throw err;
             if (!user) //if user not found
@@ -72,12 +70,14 @@ passport.use('local', new localStrategy({
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({expanded:true}));
 
+
+//Routes
 app.use('/product', product);
 app.use('/category', category);
 app.use('/postmates', postmates);
 app.use('/', index);
-app.set("port", (process.env.PORT || 5000));
 
+app.set("port", (process.env.PORT || 5000));
 app.listen(app.get("port"), function(){
     console.log("Listening on port: " + app.get("port"));
 });

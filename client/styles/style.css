@@ -248,15 +248,15 @@ md-content.md-default-theme {
     padding: 30px 10% 50px 10%;
 }
 
-/*img {*/
-    /*width: 100%*/
-/*}*/
+.center {
+    text-align: center;
+}
 
 .card {
     background-color: white;
     width: 250px;
     height: 300px;
-    margin: 10px 10px 10px 10px;
+    margin: 10px 15px 10px 15px;
     display: inline-block;
     text-align: center;
 }
@@ -268,4 +268,7 @@ md-content.md-default-theme {
 .product-card-content {
     padding: 0px 20px 30px;
     background-color: white;
+}
+.product-img {
+    max-height: 300px
 }

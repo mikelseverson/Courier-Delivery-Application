@@ -1,8 +1,6 @@
 var express = require('express');
 var Products = require('../models/product');
-
 var router = express.Router();
-
 
 //Create new product
 router.post("/create", function(req, res) {

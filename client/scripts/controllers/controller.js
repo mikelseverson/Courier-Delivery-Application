@@ -1,5 +1,7 @@
 myApp.controller('CategoryController',['$scope', '$routeParams', '$http', function($scope, $routeParams, $http) {
+    //Sets current category to scope for dom usage
     $scope.category = $routeParams.category;
+
     //Get products within category
     $http.get("/category/"+ $routeParams.category +"/products").then(function(res) {
         $scope.products = res.data;
@@ -16,10 +18,9 @@ myApp.controller('ProductController',['$scope', '$routeParams', '$http', functio
 
 myApp.controller("QuoteController", ["$scope", "$http", function($scope, $http) {
 
-    $scope.getQuote = function(delivery) {
+    $scope.getQuote = function() {
         $http.post("/postmates/query", {
-            dropoff_address: $scope.delivery.destination,
-            pickup_address: pickupAddress
+            dropoff_address: $scope.delivery.destination
         }).then(function(response) {
             console.log(response.data);
             $scope.quote = response.data;
@@ -28,13 +29,13 @@ myApp.controller("QuoteController", ["$scope", "$http", function($scope, $http) 
     };
     $scope.sendOrder = function(quoteID) {
         console.log("Attempting to create delivery from order " + quoteID)
-        $http.post("/postmates/create", {quote : quoteID,
-            pickup_address: pickupAddress,
+        $http.post("/postmates/create", {
+            quote : quoteID,
             dropoff_address: $scope.delivery.destination,
             dropoff_phone_number: $scope.delivery.phone_number,
             dropoff_name: $scope.delivery.dropoff_name,
             dropoff_business_name: $scope.dropoff_business_name,
-            dropoff_notes: $scope.dropoff_notes})
+            dropoff_notes: $scope.dropoff_notes })
             .then(function(response) {
             $scope.orderDetails = response.data;
             console.log(response.data);
@@ -54,13 +55,6 @@ myApp.controller('AdminController', ['$scope', '$http','$interval', function($sc
         console.log(res.data);
         $scope.delivery = res.data;
     });
-
-    //$interval(function() {
-    //    $http.get("/postmates/deliveries").then(function(res) {
-    //            console.log(res.data);
-    //            $scope.delivery = res.data;
-    //        })
-    //}, 10000);
 
     $scope.newProduct = function() {
         $http.post("/product/create", {

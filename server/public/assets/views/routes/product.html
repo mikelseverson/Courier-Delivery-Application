@@ -1,45 +1,50 @@
-
 <!--Product Information-->
 <div class="md-padding">
-        <md-card>
-            <md-toolbar>
-                <div class="md-toolbar-tools">
-                    <h2 class="md-flex">{{product.name}} - {{product.price | currency}}</h2>
-                </div>
-            </md-toolbar>
-            <md-card-content>
-                <img ng-src="{{product.img_src}}" class="md-card-image" alt="Washed Out">
-                <div ng-controller="QuoteController">
-                    <h1 class="md-title">Delivery:</h1>
-                    <md-input-container>
-                        <md-icon md-svg-src="/assets/images/ic_place_24px.svg"></md-icon>
-                        <input ng-model="delivery.destination" type="text" placeholder="Address" ng-model-options="{ updateOn: 'blur' }"
-                               ng-keyup="cancel($event)" ng-change='getQuote(delivery)'>
-                    </md-input-container>
-                    <md-input-container>
-                        <md-icon md-svg-src="/assets/images/ic_person_24px.svg"></md-icon>
-                        <input ng-model="delivery.dropoff_name" type="text" placeholder="Name" >
-                    </md-input-container>
-                    <md-input-container>
-                        <md-icon md-svg-src="/assets/images/ic_phone_24px.svg"></md-icon>
-                        <input ng-model="delivery.phone_number" type="text" placeholder="Phone Number" >
-                    </md-input-container>
-                    <md-input-container>
-                        <md-icon md-svg-src="/assets/images/notes_24px.svg"></md-icon>
-                        <input ng-model="delivery.dropoff_notes" type="text" placeholder="Dropoff Notes (optional)" >
-                    </md-input-container>
+    <md-card>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 class="md-flex">{{product.name}} - {{product.price | currency}}</h2>
+            </div>
+        </md-toolbar>
+        <md-card-content>
+            <img ng-src="{{product.img_src}}" class="md-card-image product-img" alt="image of {{product.name}}">
+        </md-card-content>
+    </md-card>
 
-                    <div id="checkout">
-                        <p>Price: {{product.price | currency}}</p>
-                        <p>Delivery:<span ng-if="quote.fee == null"> ----</span> {{quote.fee | currency}}</p></span>
-                        <p>Total: {{product.price + quote.fee | currency}} </p>
-                        <div class="button raised" ng-click="sendOrder(quote.id)">
-                            <div class="center" fit>Send</div>
-                            <paper-ripple fit></paper-ripple>
-                        </div>
-                    </div>
-                </div>
+    <md-card>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 class="md-flex">Delivery</h2>
+            </div>
+        </md-toolbar>
+        <md-card-content ng-controller="QuoteController">
+            <md-input-container>
+                <md-icon md-svg-src="/assets/images/ic_place_24px.svg"></md-icon>
+                <input ng-model="delivery.destination" type="text" placeholder="Address" ng-model-options="{ updateOn: 'blur' }"
+                       ng-keyup="cancel($event)" ng-change='getQuote(delivery)'>
+            </md-input-container>
+            <md-input-container>
+                <md-icon md-svg-src="/assets/images/ic_person_24px.svg"></md-icon>
+                <input ng-model="delivery.dropoff_name" type="text" placeholder="Name" >
+            </md-input-container>
+            <md-input-container>
+                <md-icon md-svg-src="/assets/images/ic_phone_24px.svg"></md-icon>
+                <input ng-model="delivery.phone_number" type="text" placeholder="Phone Number" >
+            </md-input-container>
+            <md-input-container>
+                <md-icon md-svg-src="/assets/images/notes_24px.svg"></md-icon>
+                <input ng-model="delivery.dropoff_notes" type="text" placeholder="Dropoff Notes (optional)" >
+            </md-input-container>
 
-            </md-card-content>
-        </md-card>
+            <div id="checkout">
+                <p>Price: {{product.price | currency}}</p>
+                <p>Delivery:<span ng-if="quote.fee == null"> ----</span> {{quote.fee | currency}}</p></span>
+                <p>Total: {{product.price + quote.fee | currency}} </p>
+                <div class="button raised" ng-click="sendOrder(quote.id)">
+                    <div class="center" fit>Send</div>
+                    <paper-ripple fit></paper-ripple>
+                </div>
+            </div>
+        </md-card-content>
+    </md-card>
 </div>
