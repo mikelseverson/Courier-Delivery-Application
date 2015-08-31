@@ -1,7 +1,7 @@
 myApp.controller('CategoryController',['$scope', '$routeParams', '$http', function($scope, $routeParams, $http) {
     $scope.category = $routeParams.category;
     //Get products within category
-    $http.get("/"+ $scope.category +"/products").then(function(res) {
+    $http.get("/category/"+ $routeParams.category +"/products").then(function(res) {
         $scope.products = res.data;
     });
 }]);
@@ -15,7 +15,7 @@ myApp.controller('ProductController',['$scope', '$routeParams', '$http', functio
 }]);
 
 myApp.controller("QuoteController", ["$scope", "$http", function($scope, $http) {
-    var pickupAddress = "310 Hennepin Ave E, Minneapolis, MN 55414";
+
     $scope.getQuote = function(delivery) {
         $http.post("/postmates/query", {
             dropoff_address: $scope.delivery.destination,
@@ -50,24 +50,26 @@ myApp.controller('UserController', ['$scope', '$http', function($scope, $http) {
 }]);
 
 myApp.controller('AdminController', ['$scope', '$http','$interval', function($scope, $http, $interval) {
+    $http.get("/postmates/deliveries").then(function(res) {
+        console.log(res.data);
+        $scope.delivery = res.data;
+    });
 
-    $interval(function() {
-        $http.get("/postmates/deliveries").then(function(res) {
-                console.log(res.data);
-                $scope.delivery = res.data;
-            })
-    }, 10000);
+    //$interval(function() {
+    //    $http.get("/postmates/deliveries").then(function(res) {
+    //            console.log(res.data);
+    //            $scope.delivery = res.data;
+    //        })
+    //}, 10000);
 
     $scope.newProduct = function() {
-        $http.post("/create-product", {
+        $http.post("/product/create", {
             category : $scope.category,
             desc : $scope.description,
             price : $scope.price,
-            name : $scope.name })
+            name : $scope.name,
+            img_src : $scope.img_src
+        })
     };
-    //$scope.getCategories = function() {
-    //    $http.get("/categories").then(function(res) {
-    //        console.log(res);
-    //    })
-    //};
+
 }]);

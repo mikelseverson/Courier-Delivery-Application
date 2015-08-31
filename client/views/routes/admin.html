@@ -1,12 +1,19 @@
-<md-toolbar>
-    <div class="md-toolbar-tools">
-        <h2 class="md-flex">Admin Panel</h2>
-    </div>
-</md-toolbar>
-<md-content class="md-padding">
-        <md-list>
-            <md-header class="md-no-sticky">Active Deliveries</md-header>
-            <md-list-item class="md-3-line" ng-repeat="delivery in delivery.data">
+<!--<md-toolbar>-->
+    <!--<div class="md-toolbar-tools">-->
+        <!--<h2 class="md-flex">Admin Panel</h2>-->
+    <!--</div>-->
+<!--</md-toolbar>-->
+
+
+<div class="view-padding">
+    <div style="background-color: white" class="md-whiteframe-z1">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 class="md-flex">Deliveries</h2>
+            </div>
+        </md-toolbar>
+        <md-list style="padding-bottom: 0px;">
+            <md-list-item class="md-3-line" ng-repeat="delivery in delivery.data" ng-if="$index < 7">
                 <img ng-if="delivery.courier.img_href != undefined" ng-src="{{delivery.courier.img_href}}" alt="image of {{delivery.courier.name}}" class="md-avatar">
                 <div class="md-list-item-text">
                     <h3>{{delivery.id}}</h3>
@@ -24,29 +31,43 @@
                 <md-divider inset></md-divider>
             </md-list-item>
         </md-list>
-</md-content>
-<md-content>
-    <div id="new-product">
-        <p>Add Product</p>
-        <md-input-container>
-            <label>Category</label>
-            <input type="text" ng-model="category">
-        </md-input-container>
-        <md-input-container>
-            <label>Name</label>
-            <input type="text" ng-model="name">
-        </md-input-container>
-        <md-input-container>
-            <label>Description</label>
-            <input type="text" ng-model="description">
-        </md-input-container>
-        <md-input-container>
-            <label>Price</label>
-            <input type="text" ng-model="price">
-        </md-input-container>
-        <div class="button raised" ng-click="newProduct()">
-            <div class="center" fit>Create</div>
-            <paper-ripple fit></paper-ripple>
+    </div>
+</div>
+
+
+
+<div style="padding: 30px 10% 50px 10%;">
+    <div style="background-color: white;" class="md-whiteframe-z1">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 class="md-flex">Add Product</h2>
+            </div>
+        </md-toolbar>
+        <div style="padding: 20px 20px 20px 20px;">
+            <md-input-container>
+                <label>Category</label>
+                <input type="text" ng-model="category">
+            </md-input-container>
+            <md-input-container>
+                <label>Name</label>
+                <input type="text" ng-model="name">
+            </md-input-container>
+            <md-input-container>
+                <label>Description</label>
+                <input type="text" ng-model="description">
+            </md-input-container>
+            <md-input-container>
+                <label>Image src</label>
+                <input type="text" ng-model="img_src">
+            </md-input-container>
+            <md-input-container>
+                <label>Price</label>
+                <input type="text" ng-model="price">
+            </md-input-container>
+            <div class="button raised" ng-click="newProduct()">
+                <div class="center" fit>Create</div>
+                <paper-ripple fit></paper-ripple>
+            </div>
         </div>
     </div>
-</md-content>
+</div>

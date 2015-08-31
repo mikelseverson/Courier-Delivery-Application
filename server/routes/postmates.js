@@ -18,7 +18,7 @@ router.post("/create", function(req, res) {
         manifest: "a box of kittens",
 
         pickup_name: "The Warehouse",
-        pickup_address: req.body.pickup_address,
+        pickup_address: "310 Hennepin Ave E, Minneapolis, MN 55414",
         pickup_phone_number: "555-555-5555",
         pickup_business_name: "Optional Pickup Business Name, Inc.",
         pickup_notes: "Optional note that this is Invoice #123",

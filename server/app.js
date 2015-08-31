@@ -5,6 +5,9 @@ var mongoose = require('mongoose');
 //Routes
 var index = require('./routes/index');
 var postmates = require('./routes/postmates');
+var product = require('./routes/product');
+var category = require('./routes/category');
+
 
 //Passport Setup
 var passport = require('passport');
@@ -68,6 +71,9 @@ passport.use('local', new localStrategy({
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({expanded:true}));
+
+app.use('/product', product);
+app.use('/category', category);
 app.use('/postmates', postmates);
 app.use('/', index);
 app.set("port", (process.env.PORT || 5000));

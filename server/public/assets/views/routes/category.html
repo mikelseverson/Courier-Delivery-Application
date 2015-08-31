@@ -3,14 +3,15 @@
         <h2 class="md-flex">{{category}}</h2>
     </div>
 </md-toolbar>
-
-<div style="padding: 30px 10% 50px 10%;">
-    <div ng-repeat="product in products" style="background-color: white; width: 250px; height: 300px; margin: 10px 10px 10px 10px;display: inline-block;" class="md-whiteframe-z1">
+<div class="view-padding">
+    <div ng-repeat="product in products" class="md-whiteframe-z1 card">
         <md-toolbar>
             <div class="md-toolbar-tools">
                 <h2 class="md-flex">{{product.name}}</h2>
             </div>
         </md-toolbar>
-        <a ng-href="#/category/{{category}}/product/{{product._id}}">{{product.name}}</a>
+        <a ng-href="#/category/{{category}}/product/{{product._id}}">
+            <img ng-src="{{product.img_src}}">
+        </a>
     </div>
 </div>

@@ -36,8 +36,7 @@ myApp.controller("AppCtrl", ["$scope", "$mdSidenav","$http", function($scope, $m
     $scope.toggleSidenav = function (a) {
         $mdSidenav(a).toggle()
     };
-    $http.get("/get-categories").then(function (res) {
-            console.log(res);
+    $http.get("/category/all").then(function (res) {
             $scope.categories = res.data;
     });
 }]);
