@@ -65,15 +65,23 @@ myApp.controller('AdminController', ['$scope', '$http','$interval', function($sc
     });
 
     $scope.createProduct = function() {
-        $http.post("/product/create", {
-            category : $scope.category,
-            desc : $scope.description,
-            price : $scope.price,
-            name : $scope.name,
-            img_src : $scope.img_src,
-            url_slug : $scope.url_slug
-        });
-        $scope.getData();
+        if($scope.categoryId != null) {
+            $http.post("/product/create", {
+                category : $scope.categoryId,
+                desc : $scope.description,
+                price : $scope.price,
+                name : $scope.name,
+                img_src : $scope.img_src,
+                url_slug : $scope.url_slug
+            }).then(function(response) {
+                $scope.getData();
+            });
+        }
+    };
+
+    $scope.selectCategory = function(chip) {
+        console.log(chip);
+        $scope.categoryId = chip._id;
     };
 
     $scope.createCategory = function() {
