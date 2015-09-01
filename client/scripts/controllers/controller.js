@@ -79,6 +79,26 @@ myApp.controller('AdminController', ['$scope', '$http','$interval', function($sc
         }
     };
 
+    $scope.postmatesExampleOrder = function() {
+
+            $http.post("/postmates/query", {
+                dropoff_address: "1750 Hennepin Ave Minneapolis, MN 55403"
+            }).then(function(response) {
+                console.log(response.data);
+                $http.post("/postmates/create", {
+                    quote : response.data,
+                    dropoff_address: "1750 Hennepin Ave Minneapolis, MN 55403",
+                    dropoff_phone_number: "123-456-7890",
+                    dropoff_name: "demo",
+                    dropoff_notes: "demo" })
+                    .then(function(response) {
+                        $scope.getData();
+                        console.log(response.data);
+                    })
+
+            })
+    }
+
     $scope.selectCategory = function(chip) {
         console.log(chip);
         $scope.categoryId = chip._id;
