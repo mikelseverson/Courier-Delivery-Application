@@ -2,17 +2,16 @@ var express = require('express');
 var path = require('path');
 var Postmates = require('postmates');
 var postmates = new Postmates('cus_KKTBUzym9jC16k', '6854a484-6226-43b8-ab7f-0890841bee0a');
-
 var router = express.Router();
 
-//Receive Postmates Quote Price
+//Receive Postmates quote price
 router.post("/query", function(request, response) {
     postmates.quote({ dropoff_address: request.body.dropoff_address, pickup_address: "310 Hennepin Ave E, Minneapolis, MN 55414"}, function(err, res) {
         if(res.body !== undefined) response.send(res.body);
     });
 });
 
-//Submit Quote to Postmates for delivery
+//Post quote to Postmates
 router.post("/create", function(req, res) {
     postmates.new({
         manifest: "a box of kittens",
@@ -36,7 +35,7 @@ router.post("/create", function(req, res) {
     });
 });
 
-//Grab a list of all active deliveries
+//Get all deliveries
 router.get("/deliveries", function(req, res) {
     postmates.list(function(err, response) {
         if(response.body == undefined) {

@@ -2,6 +2,9 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var passport = require('passport');
+var session = require('express-session');
+var localStrategy = require('passport-local').Strategy;
 
 //Routes
 var index = require('./routes/index');
@@ -9,16 +12,10 @@ var postmates = require('./routes/postmates');
 var product = require('./routes/product');
 var category = require('./routes/category');
 
-//Passport Setup
-var passport = require('passport');
-var session = require('express-session');
-var localStrategy = require('passport-local').Strategy;
-
 //MongoDB setup
 var User = require('./models/user');
 var mongoURI = process.env.MONGOLAB_URI || "mongodb://localhost:27017/yourmarket";
 var mongoDB = mongoose.connect(mongoURI).connection;
-
 mongoDB.on('error', function(err){
     if(err) console.log("MONGO ERROR: ", err);
 });
@@ -26,8 +23,10 @@ mongoDB.once('open', function(){
     console.log("CONNECTED TO MONGODB!");
 });
 
+//Initialize Express
 var app = express();
 
+//Passport Setup
 app.use(session({
     secret: 'secret',
     key: 'user',
@@ -35,7 +34,6 @@ app.use(session({
     s: false,
     cookie: { maxAge: 60000, secure: false }
 }));
-
 app.use(passport.initialize());
 app.use(passport.session());
 passport.serializeUser(function(user, done) {
@@ -66,12 +64,10 @@ passport.use('local', new localStrategy({
     }
 ));
 
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({expanded:true}));
 
-
-//Routes
+//Initialize Routes
 app.use('/product', product);
 app.use('/category', category);
 app.use('/postmates', postmates);

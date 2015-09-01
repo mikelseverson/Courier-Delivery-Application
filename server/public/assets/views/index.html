@@ -12,9 +12,9 @@
 </head>
 
 <body layout="column" class="md-default-theme" ng-controller="AppCtrl">
-    <md-toolbar class="md-whiteframe-z2">
+    <md-toolbar class="md-whiteframe-z2" hide-gt-sm>
         <div class="md-toolbar-tools">
-            <md-button ng-click="toggleSidenav('left')" hide-gt-sm class="md-icon-button">
+            <md-button ng-click="toggleSidenav('left')" class="md-icon-button">
                 <md-icon aria-label="Menu" md-svg-icon="https://s3-us-west-2.amazonaws.com/s.cdpn.io/68133/menu.svg"></md-icon>
             </md-button>
             <h1 class="md-flex">Store Front</h1>
@@ -25,6 +25,7 @@
         <!--Navigation-->
         <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z3"
                     md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
+            <h1>Store Front</h1>
             <a ng-click="toggleSidenav('left')" href="#home"><h1 class="md-title">Home</h1></a>
             <div ng-repeat="category in categories">
                 <a ng-click="toggleSidenav('left')" ng-href="#/category/{{category}}"><h1 class="md-title test">{{category}}</h1></a>

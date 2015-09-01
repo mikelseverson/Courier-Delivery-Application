@@ -17,8 +17,8 @@ myApp.config(['$routeProvider', function($routeProvider){
         when('/about', {
             templateUrl: "/assets/views/routes/about.html"
         }).
-        when('/admin-login', {
-            templateUrl: "/assets/views/routes/admin-login.html"
+        when('/login', {
+            templateUrl: "/assets/views/routes/login.html"
         }).
         when('/register', {
             templateUrl: "/assets/views/routes/register.html"

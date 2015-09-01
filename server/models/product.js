@@ -1,6 +1,3 @@
-/**
- * Created by mikelseverson on 8/25/15.
- */
 var mongoose = require('mongoose');
 
 var Productschema = new mongoose.Schema({

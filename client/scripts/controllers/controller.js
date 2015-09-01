@@ -28,7 +28,7 @@ myApp.controller("QuoteController", ["$scope", "$http", function($scope, $http) 
         })
     };
     $scope.sendOrder = function(quoteID) {
-        console.log("Attempting to create delivery from order " + quoteID)
+        console.log("Attempting to create delivery from quote " + quoteID)
         $http.post("/postmates/create", {
             quote : quoteID,
             dropoff_address: $scope.delivery.destination,

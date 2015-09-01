@@ -1,15 +1,25 @@
-<h1 class="md-title">Login</h1>
-<form action="/login" method="post">
-    <div>
-        <label for="username">Username:</label>
-        <input type="text" name="username" id="username"/>
-    </div>
-    <div>
-        <label for="password">Password:</label>
-        <input type="password" name="password" id="password"/>
-    </div>
-    <div>
-        <input type="submit" value="Login"/>
-        <a href="#register">Become a Vendor</a>
-    </div>
-</form>
+<div class="md-padding">
+    <md-card>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 class="md-flex">Login</h2>
+            </div>
+        </md-toolbar>
+        <md-card-content>
+            <form action="/login" method="post">
+                <div>
+                    <label for="username">Username:</label>
+                    <input type="text" name="username" id="username"/>
+                </div>
+                <div>
+                    <label for="password">Password:</label>
+                    <input type="password" name="password" id="password"/>
+                </div>
+                <div>
+                    <input type="submit" value="Login"/>
+                    <a href="#register">Register</a>
+                </div>
+            </form>
+        </md-card-content>
+    </md-card>
+</div>
