@@ -52,9 +52,9 @@
             </md-input-container>
 
             <div id="checkout">
-                <p>Price: {{product.price | currency}}</p>
+                <p>Price: {{productData.price | currency}}</p>
                 <p>Delivery:<span ng-if="quote.fee == null"> ----</span> {{quote.fee | currency}}</p></span>
-                <p>Total: {{product.price + quote.fee | currency}} </p>
+                <p>Total: {{productData.price + quote.fee | currency}} </p>
                 <div class="button raised" ng-click="sendOrder(quote.id)">
                     <div class="center" fit>Send</div>
                     <paper-ripple fit></paper-ripple>
