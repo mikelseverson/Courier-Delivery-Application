@@ -2,16 +2,28 @@
 <div class="md-padding">
 
     <!--Product Card-->
-    <md-card>
-        <md-toolbar>
-            <div class="md-toolbar-tools">
-                <h2 class="md-flex">{{product.name}} - {{product.price | currency}}</h2>
-            </div>
-        </md-toolbar>
-        <md-card-content>
-            <img ng-src="{{product.img_src}}" class="md-card-image product-img" alt="image of {{product.name}}">
-        </md-card-content>
-    </md-card>
+    <div layout="column" layout-gt-md="row">
+        <md-card flex-gt-md="40">
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <h2 class="md-flex">{{product.name}} - {{product.price | currency}}</h2>
+                </div>
+            </md-toolbar>
+            <md-card-content>
+                <img ng-src="{{product.img_src}}" class="md-card-image product-img" alt="image of {{product.name}}">
+            </md-card-content>
+        </md-card>
+        <md-card flex-gt-md>
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <h2 class="md-flex">Description</h2>
+                </div>
+            </md-toolbar>
+            <md-card-content>
+                <p> {{product.desc}}</p>
+            </md-card-content>
+        </md-card>
+    </div>
 
     <!--Delivery Card-->
     <md-card>
