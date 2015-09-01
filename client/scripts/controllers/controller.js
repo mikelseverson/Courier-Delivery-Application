@@ -1,19 +1,27 @@
 myApp.controller('CategoryController',['$scope', '$routeParams', '$http', function($scope, $routeParams, $http) {
-    //Sets current category to scope for dom usage
     $scope.category = $routeParams.category;
 
-    //Get products within category
-    $http.get("/category/"+ $routeParams.category +"/products").then(function(res) {
-        $scope.products = res.data;
-    });
+    angular.forEach($scope.categories, function(category) {
+        if(category.url == $scope.category) {
+            $scope.products = category.products
+        }
+    })
 }]);
 
 myApp.controller('ProductController',['$scope', '$routeParams', '$http', function($scope, $routeParams, $http) {
     $scope.product = $routeParams.product;
     $scope.category = $routeParams.category;
-    $http.get("/product/" + $routeParams.product).then(function(res) {
-        $scope.product = res.data[0];
-    });
+
+    angular.forEach($scope.categories, function(category) {
+        if(category.url == $routeParams.category) {
+            angular.forEach(category.products, function(product) {
+                if(product.url_slug == $routeParams.product) {
+                    $scope.productData = product;
+                }
+            })
+        }
+    })
+
 }]);
 
 myApp.controller("QuoteController", ["$scope", "$http", function($scope, $http) {
@@ -52,18 +60,29 @@ myApp.controller('UserController', ['$scope', '$http', function($scope, $http) {
 
 myApp.controller('AdminController', ['$scope', '$http','$interval', function($scope, $http, $interval) {
     $http.get("/postmates/deliveries").then(function(res) {
-        console.log(res.data);
+        console.log("received delivery data", res.data);
         $scope.delivery = res.data;
     });
 
-    $scope.newProduct = function() {
+    $scope.createProduct = function() {
         $http.post("/product/create", {
             category : $scope.category,
             desc : $scope.description,
             price : $scope.price,
             name : $scope.name,
-            img_src : $scope.img_src
-        })
+            img_src : $scope.img_src,
+            url_slug : $scope.url_slug
+        });
+        $scope.getData();
     };
 
+    $scope.createCategory = function() {
+        $http.post("/category/create", {
+            name : $scope.newCategory,
+            url  : $scope.urlSlug,
+            description : $scope.newDescription
+        }).then(function(response) {
+            $scope.categories.push(response.data);
+        });
+    };
 }]);

@@ -44,39 +44,77 @@
         </md-card-content>
     </md-card>
 
+    <div layout="row">
+        <!--New Product Card-->
+        <md-card flex='50'>
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <h2 class="md-flex">Add Product</h2>
+                </div>
+            </md-toolbar>
+            <md-card-content>
+                <md-input-container>
+                    <label>Name</label>
+                    <input type="text" ng-model="name">
+                </md-input-container>
+                <md-chips ng-model="categories" readonly="true">
+                    <md-chip-template>
+                        {{$chip.name}}
+                    </md-chip-template>
+                </md-chips>
+                <md-input-container>
+                    <label>Category</label>
+                    <input type="text" ng-model="category">
+                </md-input-container>
+                <md-input-container>
+                    <label>Description</label>
+                    <input type="text" ng-model="description">
+                </md-input-container>
+                <md-input-container>
+                    <label>Image src</label>
+                    <input type="text" ng-model="img_src">
+                </md-input-container>
+                <md-input-container>
+                    <label>URL slug</label>
+                    <input type="text" ng-model="url_slug">
+                </md-input-container>
+                <md-input-container>
+                    <label>Price</label>
+                    <input type="text" ng-model="price">
+                </md-input-container>
+                <div class="button raised" ng-click="createProduct()">
+                    <div class="center" fit>Create</div>
+                    <paper-ripple fit></paper-ripple>
+                </div>
+            </md-card-content>
+        </md-card>
 
-    <!--New Product Card-->
-    <md-card>
-        <md-toolbar>
-            <div class="md-toolbar-tools">
-                <h2 class="md-flex">Add Product</h2>
-            </div>
-        </md-toolbar>
-        <md-card-content>
-            <md-input-container>
-                <label>Category</label>
-                <input type="text" ng-model="category">
-            </md-input-container>
-            <md-input-container>
-                <label>Name</label>
-                <input type="text" ng-model="name">
-            </md-input-container>
-            <md-input-container>
-                <label>Description</label>
-                <input type="text" ng-model="description">
-            </md-input-container>
-            <md-input-container>
-                <label>Image src</label>
-                <input type="text" ng-model="img_src">
-            </md-input-container>
-            <md-input-container>
-                <label>Price</label>
-                <input type="text" ng-model="price">
-            </md-input-container>
-            <div class="button raised" ng-click="newProduct()">
-                <div class="center" fit>Create</div>
-                <paper-ripple fit></paper-ripple>
-            </div>
-        </md-card-content>
-    </md-card>
+        <!--New Category Card-->
+        <md-card flex='50'>
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <h2 class="md-flex">Create Category</h2>
+                </div>
+            </md-toolbar>
+            <md-card-content>
+                <md-input-container>
+                    <label>Category</label>
+                    <input type="text" ng-model="newCategory">
+                </md-input-container>
+                <md-input-container>
+                    <label>url slug</label>
+                    <input type="text" ng-model="urlSlug">
+                </md-input-container>
+                <md-input-container>
+                    <label>Description</label>
+                    <input type="text" ng-model="newDescription">
+                </md-input-container>
+                <div class="button raised" ng-click="createCategory()">
+                    <div class="center" fit>Create</div>
+                    <paper-ripple fit></paper-ripple>
+                </div>
+            </md-card-content>
+        </md-card>
+    </div>
+
 </div>

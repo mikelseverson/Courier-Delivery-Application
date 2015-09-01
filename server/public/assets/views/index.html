@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html ng-app="YourMarket">
+
 <head lang="en">
     <title>YourMarket</title>
     <meta name="viewport" content="initial-scale=1" />
@@ -9,6 +10,7 @@
     <link rel="stylesheet" href="/vendors/angular-material/angular-material.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
     <link rel="stylesheet" href="/assets/styles/style.css">
+    <link href='https://api.mapbox.com/mapbox.js/v2.2.1/mapbox.css' rel='stylesheet' />
 </head>
 
 <body layout="column" class="md-default-theme" ng-controller="AppCtrl">
@@ -28,7 +30,7 @@
             <h1>Store Front</h1>
             <a ng-click="toggleSidenav('left')" href="#home"><h1 class="md-title">Home</h1></a>
             <div ng-repeat="category in categories">
-                <a ng-click="toggleSidenav('left')" ng-href="#/category/{{category}}"><h1 class="md-title test">{{category}}</h1></a>
+                <a ng-click="toggleSidenav('left')" ng-href="#/{{category.url}}"><h1 class="md-title test">{{category.name}}</h1></a>
             </div>
             <a ng-click="toggleSidenav('left')" href="#about"><h1 class="md-title">About</h1></a>
             <a ng-click="toggleSidenav('left')" href="#admin"><h1 class="md-title">Admin</h1></a>
@@ -48,6 +50,7 @@
     <script type="text/javascript" src="/vendors/angular-route/angular-route.min.js"></script>
     <script type="text/javascript" src="/assets/scripts/app.min.js"></script>
     <script type="text/javascript" src="/assets/scripts/controllers/controller.min.js"></script>
+    <script src='https://api.mapbox.com/mapbox.js/v2.2.1/mapbox.js'></script>
 
 </body>
 </html>

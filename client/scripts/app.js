@@ -6,14 +6,6 @@ myApp.config(['$routeProvider', function($routeProvider){
         when('/home', {
             templateUrl: "/assets/views/routes/home.html"
         }).
-        when('/category/:category', {
-            templateUrl: "/assets/views/routes/category.html",
-            controller: "CategoryController"
-        }).
-        when('/category/:category/product/:product', {
-            templateUrl: "/assets/views/routes/product.html",
-            controller: "ProductController"
-        }).
         when('/about', {
             templateUrl: "/assets/views/routes/about.html"
         }).
@@ -27,6 +19,14 @@ myApp.config(['$routeProvider', function($routeProvider){
             templateUrl: "/assets/views/routes/admin.html",
             controller: 'AdminController'
         }).
+        when('/:category', {
+            templateUrl: "/assets/views/routes/category.html",
+            controller: "CategoryController"
+        }).
+        when('/:category/:product', {
+            templateUrl: "/assets/views/routes/product.html",
+            controller: "ProductController"
+        }).
         otherwise({ //Catch-all for routes not listed above
             redirectTo: "/home"
         })
@@ -36,7 +36,14 @@ myApp.controller("AppCtrl", ["$scope", "$mdSidenav","$http", function($scope, $m
     $scope.toggleSidenav = function (a) {
         $mdSidenav(a).toggle()
     };
-    $http.get("/category/all").then(function (res) {
+    $scope.getData = function() {
+        $http.get("/category/all").then(function (res) {
+            console.log(res.data);
             $scope.categories = res.data;
+        });
+    };
+    $http.get("/category/all").then(function (res) {
+        console.log("received store data", res.data);
+        $scope.categories = res.data;
     });
 }]);
