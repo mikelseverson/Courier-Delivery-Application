@@ -25,42 +25,53 @@
         </md-card>
     </div>
 
-    <!--Delivery Card-->
-    <md-card>
-        <md-toolbar>
-            <div class="md-toolbar-tools">
-                <h2 class="md-flex">Delivery</h2>
-            </div>
-        </md-toolbar>
-        <md-card-content ng-controller="QuoteController">
-            <md-input-container>
-                <md-icon md-svg-src="/assets/images/ic_place_24px.svg"></md-icon>
-                <input ng-model="delivery.destination" type="text" placeholder="Minneapolis Address" ng-model-options="{ updateOn: 'blur' }"
-                       ng-keyup="cancel($event)" ng-change='getQuote(delivery)'>
-            </md-input-container>
-            <md-input-container>
-                <md-icon md-svg-src="/assets/images/ic_person_24px.svg"></md-icon>
-                <input ng-model="delivery.dropoff_name" type="text" placeholder="Name" >
-            </md-input-container>
-            <md-input-container>
-                <md-icon md-svg-src="/assets/images/ic_phone_24px.svg"></md-icon>
-                <input ng-model="delivery.phone_number" type="text" placeholder="Phone Number" >
-            </md-input-container>
-            <md-input-container>
-                <md-icon md-svg-src="/assets/images/notes_24px.svg"></md-icon>
-                <input ng-model="delivery.dropoff_notes" type="text" placeholder="Dropoff Notes (optional)" >
-            </md-input-container>
 
-            <div id="checkout">
-                <p>Price: {{productData.price | currency}}</p>
-                <p>Delivery:<span ng-if="quote.fee == null"> ----</span> {{quote.fee | currency}}</p></span>
-                <p>Total: {{productData.price + quote.fee | currency}} </p>
-                <div class="button raised" ng-click="sendOrder(quote.id)">
-                    <div class="center" fit>Send</div>
-                    <paper-ripple fit></paper-ripple>
+    <div layout="column" layout-gt-md="row" ng-controller="QuoteController">
+        <!--Delivery Card-->
+        <md-card flex-gt-md="50">
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <h2 class="md-flex">Delivery</h2>
                 </div>
-            </div>
-        </md-card-content>
-    </md-card>
+            </md-toolbar>
+            <md-card-content>
+                <md-input-container>
+                    <md-icon md-svg-src="/assets/images/ic_place_24px.svg"></md-icon>
+                    <input ng-model="delivery.destination" type="text" placeholder="Minneapolis Address" ng-model-options="{ updateOn: 'blur' }"
+                           ng-keyup="cancel($event)" ng-change='getQuote(delivery)'>
+                </md-input-container>
+                <md-input-container>
+                    <md-icon md-svg-src="/assets/images/ic_person_24px.svg"></md-icon>
+                    <input ng-model="delivery.dropoff_name" type="text" placeholder="Name" >
+                </md-input-container>
+                <md-input-container>
+                    <md-icon md-svg-src="/assets/images/ic_phone_24px.svg"></md-icon>
+                    <input ng-model="delivery.phone_number" type="text" placeholder="Phone Number" >
+                </md-input-container>
+                <md-input-container>
+                    <md-icon md-svg-src="/assets/images/notes_24px.svg"></md-icon>
+                    <input ng-model="delivery.dropoff_notes" type="text" placeholder="Dropoff Notes (optional)" >
+                </md-input-container>
+            </md-card-content>
+        </md-card>
 
+        <md-card flex-gt-md>
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <h2 class="md-flex">Checkout</h2>
+                </div>
+            </md-toolbar>
+            <md-card-content>
+                <div id="checkout">
+                    <p>Price: {{productData.price | currency}}</p>
+                    <p>Delivery:<span ng-if="quote.fee == null"> ----</span> {{quote.fee | currency}}</p></span>
+                    <p>Total: {{productData.price + quote.fee | currency}} </p>
+                    <div class="button raised" ng-click="sendOrder(quote.id)">
+                        <div class="center" fit>Send</div>
+                        <paper-ripple fit></paper-ripple>
+                    </div>
+                </div>
+            </md-card-content>
+        </md-card>
+    </div>
 </div>

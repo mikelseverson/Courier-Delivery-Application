@@ -5,7 +5,7 @@
         <md-card flex-gt-lg="70">
             <md-toolbar>
                 <div class="md-toolbar-tools">
-                    <h2 class="md-flex">Delivery Map</h2>
+                    <h2 class="md-flex" ng-click="getPostmatesDeliveries()">Delivery Map</h2>
                 </div>
             </md-toolbar>
             <md-card-content class="no-padding">
@@ -69,10 +69,6 @@
                     </md-chip-template>
                 </md-chips>
                 <md-input-container>
-                    <label>Category</label>
-                    <input type="text" ng-model="categoryId">
-                </md-input-container>
-                <md-input-container>
                     <label>Description</label>
                     <input type="text" ng-model="description">
                 </md-input-container>
@@ -95,32 +91,50 @@
             </md-card-content>
         </md-card>
 
-        <!--New Category Card-->
-        <md-card flex-gt-md>
-            <md-toolbar>
-                <div class="md-toolbar-tools">
-                    <h2 class="md-flex">Create Category</h2>
-                </div>
-            </md-toolbar>
-            <md-card-content>
-                <md-input-container>
-                    <label>Category</label>
-                    <input type="text" ng-model="newCategory">
-                </md-input-container>
-                <md-input-container>
-                    <label>url slug</label>
-                    <input type="text" ng-model="urlSlug">
-                </md-input-container>
-                <md-input-container>
-                    <label>Description</label>
-                    <input type="text" ng-model="newDescription">
-                </md-input-container>
-                <div class="button raised" ng-click="createCategory()">
-                    <div class="center" fit>Create</div>
-                    <paper-ripple fit></paper-ripple>
-                </div>
-            </md-card-content>
-        </md-card>
+        <div layout="column"  flex-gt-md>
+            <md-card>
+                <md-toolbar>
+                    <div class="md-toolbar-tools">
+                        <h2 class="md-flex">Create Category</h2>
+                    </div>
+                </md-toolbar>
+                <md-card-content>
+                    <md-input-container>
+                        <label>Category</label>
+                        <input type="text" ng-model="newCategory">
+                    </md-input-container>
+                    <md-input-container>
+                        <label>url slug</label>
+                        <input type="text" ng-model="urlSlug">
+                    </md-input-container>
+                    <md-input-container>
+                        <label>Description</label>
+                        <input type="text" ng-model="newDescription">
+                    </md-input-container>
+                    <div class="button raised" ng-click="createCategory()">
+                        <div class="center" fit>Create</div>
+                        <paper-ripple fit></paper-ripple>
+                    </div>
+                </md-card-content>
+            </md-card>
+            <md-card>
+                <md-toolbar>
+                    <div class="md-toolbar-tools">
+                        <h2 class="md-flex">Delete Category</h2>
+                    </div>
+                </md-toolbar>
+                <md-card-content>
+                    <md-chips ng-model="categories" readonly="true">
+                        <md-chip-template ng-click="selectCategory($chip)">
+                            {{$chip.name}}
+                        </md-chip-template>
+                    </md-chips>
+                    <div class="button raised" ng-click="deleteCategory(categoryId)">
+                        <div class="center" fit>Create</div>
+                        <paper-ripple fit></paper-ripple>
+                    </div>
+                </md-card-content>
+            </md-card>
+        </div>
     </div>
-
 </div>

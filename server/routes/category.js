@@ -5,7 +5,7 @@ var router = express.Router();
 var Product = require('../models/product'),
     Category = require('../models/category');
 
-//Create Category
+//Create category
 router.post("/create", function(req, res) {
     console.log(req.body);
 
@@ -23,6 +23,15 @@ router.post("/create", function(req, res) {
         res.json(category);
     });
 });
+
+//Remove category
+router.post("/delete", function(req, res) {
+    console.log(req.body);
+    Category.find({_id : req.body.categoryId}, function(err, result) {
+    }).remove().exec();
+    res.send("attemped to remove " + req.body.id);
+});
+
 
 //Query Products by Category
 router.get("/:category/products", function(req, res) {
