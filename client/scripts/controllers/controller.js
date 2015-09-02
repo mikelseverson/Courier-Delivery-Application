@@ -61,7 +61,6 @@ myApp.controller('AdminController', ['$scope', '$http', 'uiGmapGoogleMapApi', fu
     $scope.map = { center: { latitude: 44.9778, longitude: -93.2650 }, zoom: 12 };
     $scope.markers = [];
 
-
     uiGmapGoogleMapApi.then(function(maps) {
         console.log(maps);
     });
@@ -84,21 +83,6 @@ myApp.controller('AdminController', ['$scope', '$http', 'uiGmapGoogleMapApi', fu
 
     });
 
-    $scope.createProduct = function() {
-        if($scope.categoryId != null) {
-            $http.post("/product/create", {
-                category : $scope.categoryId,
-                desc : $scope.description,
-                price : $scope.price,
-                name : $scope.name,
-                img_src : $scope.img_src,
-                url_slug : $scope.url_slug
-            }).then(function(response) {
-                $scope.getData();
-            });
-        }
-    };
-
     $scope.postmatesExampleOrder = function() {
         $http.post("/postmates/query", {
             dropoff_address: "1750 Hennepin Ave Minneapolis, MN 55403"
@@ -119,6 +103,21 @@ myApp.controller('AdminController', ['$scope', '$http', 'uiGmapGoogleMapApi', fu
 
     $scope.selectCategory = function(chip) {
         $scope.categoryId = chip._id;
+    };
+
+    $scope.createProduct = function() {
+        if($scope.categoryId != null) {
+            $http.post("/product/create", {
+                category : $scope.categoryId,
+                desc : $scope.description,
+                price : $scope.price,
+                name : $scope.name,
+                img_src : $scope.img_src,
+                url_slug : $scope.url_slug
+            }).then(function() {
+                $scope.getData();
+            });
+        }
     };
 
     $scope.createCategory = function() {
