@@ -283,3 +283,7 @@ md-content.md-default-theme {
 md-chips .md-chips {
     box-shadow: none;
 }
+
+.chip-active {
+    text-decoration: underline;
+}

@@ -63,8 +63,8 @@
                     <label>Name</label>
                     <input type="text" ng-model="name">
                 </md-input-container>
-                <md-chips ng-model="categories" readonly="true">
-                    <md-chip-template ng-click="selectCategory($chip)">
+                <md-chips ng-model="categories" readonly="true" >
+                    <md-chip-template ng-click="selectCategory($chip)" ng-click="selectCategory($chip)" ng-class="{'chip-active' : $chip._id == categoryId}">
                         {{$chip.name}}
                     </md-chip-template>
                 </md-chips>
@@ -107,10 +107,6 @@
                         <label>url slug</label>
                         <input type="text" ng-model="urlSlug">
                     </md-input-container>
-                    <md-input-container>
-                        <label>Description</label>
-                        <input type="text" ng-model="newDescription">
-                    </md-input-container>
                     <div class="button raised" ng-click="createCategory()">
                         <div class="center" fit>Create</div>
                         <paper-ripple fit></paper-ripple>
@@ -125,7 +121,7 @@
                 </md-toolbar>
                 <md-card-content>
                     <md-chips ng-model="categories" readonly="true">
-                        <md-chip-template ng-click="selectCategory($chip)">
+                        <md-chip-template ng-click="selectCategory($chip)" ng-class="{'chip-active' : $chip._id == categoryId}">
                             {{$chip.name}}
                         </md-chip-template>
                     </md-chips>
