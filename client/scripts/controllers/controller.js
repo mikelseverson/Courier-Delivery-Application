@@ -100,7 +100,18 @@ myApp.controller('AdminController', ['$scope', '$http', 'uiGmapGoogleMapApi', fu
 
     $scope.getPostmatesDeliveries();
 
-    $scope.map = { center: { latitude: 44.9778, longitude: -93.2650 }, zoom: 12 };
+    $scope.map = {
+        center: {latitude: 44.9778, longitude: -93.2650}, zoom: 12, options: {
+            panControl    : false,
+            zoomControl   : false,
+            scaleControl  : false,
+            mapTypeControl: false,
+            draggable: false,
+            scrollwheel: false,
+            streetViewControl: false
+        }
+    };
+
     $scope.markers = [];
 
     uiGmapGoogleMapApi.then(function(maps) {
