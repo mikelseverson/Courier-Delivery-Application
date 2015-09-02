@@ -8,7 +8,9 @@
             </div>
         </md-toolbar>
         <md-card-content class="no-padding">
-            <ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
+            <ui-gmap-google-map center='map.center' zoom='map.zoom' draggable="false">
+                <ui-gmap-markers models="markers" coords="'coords'" idkey="markers.id"></ui-gmap-markers>
+            </ui-gmap-google-map>
         </md-card-content>
     </md-card>
 

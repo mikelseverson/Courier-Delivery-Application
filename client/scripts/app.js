@@ -4,8 +4,8 @@ var appControllers = angular.module('appControllers', []);
 myApp.config(['$routeProvider', 'uiGmapGoogleMapApiProvider', function($routeProvider, uiGmapGoogleMapApiProvider){
 
     uiGmapGoogleMapApiProvider.configure({
-        //    key: 'your api key',
-        v: '3.20', //defaults to latest 3.X anyhow
+    //  key: 'your api key',
+        v: '3.20', //version
         libraries: 'weather,geometry,visualization'
     });
     $routeProvider.

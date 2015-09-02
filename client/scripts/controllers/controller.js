@@ -59,6 +59,7 @@ myApp.controller('UserController', ['$scope', '$http', function($scope, $http) {
 
 myApp.controller('AdminController', ['$scope', '$http', 'uiGmapGoogleMapApi', function($scope, $http, uiGmapGoogleMapApi) {
     $scope.map = { center: { latitude: 44.9778, longitude: -93.2650 }, zoom: 12 };
+    $scope.markers = [];
 
 
     uiGmapGoogleMapApi.then(function(maps) {
@@ -68,6 +69,19 @@ myApp.controller('AdminController', ['$scope', '$http', 'uiGmapGoogleMapApi', fu
     $http.get("/postmates/deliveries").then(function(res) {
         console.log("received delivery data", res.data);
         $scope.delivery = res.data;
+
+        angular.forEach(res.data.data, function(delivery, index) {
+            if(delivery.courier != null) {
+                $scope.markers.push({
+                    id: index,
+                    coords: {
+                        latitude: delivery.courier.location.lat,
+                        longitude: delivery.courier.location.lng
+                    }
+                })
+            }
+        })
+
     });
 
     $scope.createProduct = function() {
