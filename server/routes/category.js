@@ -1,26 +1,36 @@
 var express = require('express');
-var Product = require('../models/product');
-var Category = require('../models/category');
-
 var router = express.Router();
+
+//Models
+var Product = require('../models/product'),
+    Category = require('../models/category');
 
 //Create Category
 router.post("/create", function(req, res) {
     console.log(req.body);
+
     var category = new Category({
         name: req.body.name,
         url: req.body.url,
         products: []
     });
+
     category.save(function (err) {
-        console.log(err);
+        if(err) {
+            console.log(err);
+            res.send(err);
+        }
+        res.json(category);
     });
-    res.json(category);
 });
 
 //Query Products by Category
 router.get("/:category/products", function(req, res) {
     Product.find({category : req.params.category}, function(err, products) {
+        if(err) {
+            console.log(err);
+            res.send("Error finding products in category " + req.params.category);
+        }
         res.send(products);
     })
 });

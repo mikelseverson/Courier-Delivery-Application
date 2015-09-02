@@ -1,7 +1,10 @@
-var express = require('express');
+var express = require('express'),
+    path = require('path'),
+    passport = require('passport');
+
 var router = express.Router();
-var path = require('path');
-var passport = require('passport');
+
+//Models
 var Users = require('../models/user');
 
 //Vendor Log in

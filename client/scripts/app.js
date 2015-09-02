@@ -1,7 +1,13 @@
-var myApp = angular.module('YourMarket', ['ngMaterial', 'ngRoute', 'appControllers']);
+var myApp = angular.module('YourMarket', ['ngMaterial', 'ngRoute', 'appControllers', 'uiGmapgoogle-maps']);
 var appControllers = angular.module('appControllers', []);
 
-myApp.config(['$routeProvider', function($routeProvider){
+myApp.config(['$routeProvider', 'uiGmapGoogleMapApiProvider', function($routeProvider, uiGmapGoogleMapApiProvider){
+
+    uiGmapGoogleMapApiProvider.configure({
+        //    key: 'your api key',
+        v: '3.20', //defaults to latest 3.X anyhow
+        libraries: 'weather,geometry,visualization'
+    });
     $routeProvider.
         when('/home', {
             templateUrl: "/assets/views/routes/home.html"

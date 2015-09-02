@@ -7,7 +7,7 @@ var router = express.Router();
 //Receive Postmates quote price
 router.post("/query", function(request, response) {
     postmates.quote({ dropoff_address: request.body.dropoff_address, pickup_address: "310 Hennepin Ave E, Minneapolis, MN 55414"}, function(err, res) {
-        if(res.body !== undefined) response.send(res.body);
+        response.send(res.body);
     });
 });
 

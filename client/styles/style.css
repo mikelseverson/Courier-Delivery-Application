@@ -273,3 +273,8 @@ md-content.md-default-theme {
     max-height: 300px;
     max-width: 100%;
 }
+.angular-google-map-container { height: 400px; }
+
+.no-padding {
+    padding: 0;
+}

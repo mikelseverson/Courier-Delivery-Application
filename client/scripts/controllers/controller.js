@@ -1,6 +1,5 @@
-myApp.controller('CategoryController',['$scope', '$routeParams', '$http', function($scope, $routeParams, $http) {
+myApp.controller('CategoryController', ['$scope', '$routeParams', '$http', function($scope, $routeParams, $http) {
     $scope.category = $routeParams.category;
-
     angular.forEach($scope.categories, function(category) {
         if(category.url == $scope.category) {
             $scope.products = category.products
@@ -8,10 +7,9 @@ myApp.controller('CategoryController',['$scope', '$routeParams', '$http', functi
     })
 }]);
 
-myApp.controller('ProductController',['$scope', '$routeParams', '$http', function($scope, $routeParams, $http) {
+myApp.controller('ProductController', ['$scope', '$routeParams', '$http', function($scope, $routeParams, $http) {
     $scope.product = $routeParams.product;
     $scope.category = $routeParams.category;
-
     angular.forEach($scope.categories, function(category) {
         if(category.url == $routeParams.category) {
             angular.forEach(category.products, function(product) {
@@ -34,9 +32,9 @@ myApp.controller("QuoteController", ["$scope", "$http", function($scope, $http) 
             $scope.quote = response.data;
             $scope.quote.fee /= 100;
         })
-    };
+    }
+
     $scope.sendOrder = function(quoteID) {
-        console.log("Attempting to create delivery from quote " + quoteID);
         $http.post("/postmates/create", {
             quote : quoteID,
             dropoff_address: $scope.delivery.destination,
@@ -53,12 +51,20 @@ myApp.controller("QuoteController", ["$scope", "$http", function($scope, $http) 
 ]);
 
 myApp.controller('UserController', ['$scope', '$http', function($scope, $http) {
+
     $http.get("/user").then(function(response) {
         $scope.username = response.data;
     })
 }]);
 
-myApp.controller('AdminController', ['$scope', '$http','$interval', function($scope, $http, $interval) {
+myApp.controller('AdminController', ['$scope', '$http', 'uiGmapGoogleMapApi', function($scope, $http, uiGmapGoogleMapApi) {
+    $scope.map = { center: { latitude: 44.9778, longitude: -93.2650 }, zoom: 12 };
+
+
+    uiGmapGoogleMapApi.then(function(maps) {
+        console.log(maps);
+    });
+
     $http.get("/postmates/deliveries").then(function(res) {
         console.log("received delivery data", res.data);
         $scope.delivery = res.data;
@@ -80,27 +86,24 @@ myApp.controller('AdminController', ['$scope', '$http','$interval', function($sc
     };
 
     $scope.postmatesExampleOrder = function() {
-
-            $http.post("/postmates/query", {
-                dropoff_address: "1750 Hennepin Ave Minneapolis, MN 55403"
+        $http.post("/postmates/query", {
+            dropoff_address: "1750 Hennepin Ave Minneapolis, MN 55403"
+        }).then(function(response) {
+            console.log(response.data);
+            $http.post("/postmates/create", {
+                quote : response.data,
+                dropoff_address: "1750 Hennepin Ave Minneapolis, MN 55403",
+                dropoff_phone_number: "123-456-7890",
+                dropoff_name: "demo",
+                dropoff_notes: "demo"
             }).then(function(response) {
+                $scope.getData();
                 console.log(response.data);
-                $http.post("/postmates/create", {
-                    quote : response.data,
-                    dropoff_address: "1750 Hennepin Ave Minneapolis, MN 55403",
-                    dropoff_phone_number: "123-456-7890",
-                    dropoff_name: "demo",
-                    dropoff_notes: "demo" })
-                    .then(function(response) {
-                        $scope.getData();
-                        console.log(response.data);
-                    })
-
             })
-    }
+        })
+    };
 
     $scope.selectCategory = function(chip) {
-        console.log(chip);
         $scope.categoryId = chip._id;
     };
 
@@ -110,6 +113,7 @@ myApp.controller('AdminController', ['$scope', '$http','$interval', function($sc
             url  : $scope.urlSlug,
             description : $scope.newDescription
         }).then(function(response) {
+            console.log(response);
             $scope.categories.push(response.data);
         });
     };
