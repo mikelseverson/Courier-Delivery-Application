@@ -17,7 +17,7 @@
         </md-card>
 
 
-        <!--Deliveries Card-->
+        <!--Delivery Feed Card-->
         <md-card flex-gt-lg>
             <md-toolbar>
                 <div class="md-toolbar-tools">
@@ -25,7 +25,6 @@
                     <md-icon class="align-right" ng-click="postmatesExampleOrder()" md-svg-src="/assets/images/plus.svg"></md-icon>
                 </div>
             </md-toolbar>
-
             <md-card-content style="padding-bottom: 0px;">
                 <md-list style="padding-bottom: 0px;">
                     <md-list-item class="md-3-line" ng-repeat="delivery in delivery.data" ng-if="$index < 7">
@@ -93,7 +92,10 @@
             </md-card-content>
         </md-card>
 
+
         <div layout="column"  flex-gt-md>
+
+            <!--Create Category Card-->
             <md-card>
                 <md-toolbar>
                     <div class="md-toolbar-tools">
@@ -115,6 +117,8 @@
                     </div>
                 </md-card-content>
             </md-card>
+
+            <!--Delete Category Card-->
             <md-card>
                 <md-toolbar>
                     <div class="md-toolbar-tools">
