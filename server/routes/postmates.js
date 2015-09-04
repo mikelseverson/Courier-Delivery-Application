@@ -1,26 +1,30 @@
-var express = require('express');
-var path = require('path');
-var Postmates = require('postmates');
+var express = require('express'),
+    path = require('path'),
+    Postmates = require('postmates');
+
 var postmates = new Postmates('cus_KKTBUzym9jC16k', '6854a484-6226-43b8-ab7f-0890841bee0a');
 var router = express.Router();
 
-//Receive Postmates quote price
+//Query Postmates for delivery quote
 router.post("/query", function(request, response) {
-    postmates.quote({ dropoff_address: request.body.dropoff_address, pickup_address: "310 Hennepin Ave E, Minneapolis, MN 55414"}, function(err, res) {
+    postmates.quote({
+        dropoff_address: request.body.dropoff_address,
+        pickup_address: "310 Hennepin Ave E, Minneapolis, MN 55414"
+    }, function(err, res) {
         response.send(res.body);
     });
 });
 
-//Post quote to Postmates
+//Submit delivery to postmates
 router.post("/create", function(req, res) {
     postmates.new({
         manifest: "a box of kittens",
 
-        pickup_name: "The Warehouse",
+        pickup_name: "The Store",
         pickup_address: "310 Hennepin Ave E, Minneapolis, MN 55414",
-        pickup_phone_number: "555-555-5555",
-        pickup_business_name: "Optional Pickup Business Name, Inc.",
-        pickup_notes: "Optional note that this is Invoice #123",
+        pickup_phone_number: "000-000-0000",
+        //pickup_business_name: "Business Name",
+        //pickup_notes: "Optional note that this is Invoice #123",
 
         dropoff_name: req.body.dropoff_name,
         dropoff_address: req.body.dropoff_address,

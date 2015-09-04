@@ -7,14 +7,16 @@ var Product = require('../models/product'),
 
 //Create new product and add to category
 router.post("/create", function(req, res) {
-    console.log("new Product", req.body);
     var product = new Product(req.body);
-    Category.findByIdAndUpdate(req.body.category, { $push: { "products" : product}},
-        { safe: true, upsert: true}, function() {
-        product.save(function (err, Category) {
-            if(err) console.log(err.message);
-            res.json(Category);
-        })
+    product.save(function (err) {
+        if(err) console.log(err.message);
+        else {
+            Category.findByIdAndUpdate(req.body.category, { $push: { "products" : product}},
+                { safe: true, upsert: true}, function(err, cat){
+                    console.log(err);
+                    console.log(cat);
+                });
+        }
     });
 });
 
@@ -22,7 +24,7 @@ router.post("/create", function(req, res) {
 router.get("/:productId", function(req, res) {
     Product.find({_id : req.params.productId}, function(err, product) {
         if(err) {
-            res.send("Error product " + req.params.productId + " not found.");
+            res.send(err);
             console.log(err);
         }
         res.send(product);

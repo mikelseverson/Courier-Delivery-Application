@@ -7,7 +7,7 @@ myApp.controller('CategoryController', ['$scope', '$routeParams', '$http', funct
     })
 }]);
 
-myApp.controller('ProductController', ['$scope', '$routeParams', '$http', function($scope, $routeParams, $http) {
+myApp.controller('ProductController', ['$scope', '$routeParams', function($scope, $routeParams) {
     $scope.product = $routeParams.product;
     $scope.category = $routeParams.category;
     angular.forEach($scope.categories, function(category) {
@@ -123,7 +123,7 @@ myApp.controller('AdminController', ['$scope', '$http', 'uiGmapGoogleMapApi', fu
     };
 
     $scope.createProduct = function() {
-        if($scope.categoryId != null) {
+        if($scope.categoryId != null && $scope.url_slug != undefined && $scope.price != undefined) {
             $http.post("/product/create", {
                 category : $scope.categoryId,
                 desc : $scope.description,
@@ -131,28 +131,31 @@ myApp.controller('AdminController', ['$scope', '$http', 'uiGmapGoogleMapApi', fu
                 name : $scope.name,
                 img_src : $scope.img_src,
                 url_slug : $scope.url_slug
-            }).then(function() {
+            }).then(function(response) {
+                console.log(response);
                 $scope.getData();
             });
         }
     };
 
     $scope.createCategory = function() {
-        $http.post("/category/create", {
-            name : $scope.newCategory,
-            url  : $scope.urlSlug,
-            description : $scope.newDescription
-        }).then(function(response) {
-            console.log(response);
-            $scope.categories.push(response.data);
-        });
+        if($scope.newCategory != undefined && $scope.urlSlug != undefined) {
+            $http.post("/category/create", {
+                name : $scope.newCategory,
+                url  : $scope.urlSlug
+            }).then(function(response) {
+                console.log(response);
+                $scope.categories.push(response.data);
+            });
+        }
     };
 
     $scope.deleteCategory = function(id) {
-        $http.post("/category/delete", { categoryId : id})
-            .then(function(response) {
-                $scope.getData();
-                console.log(response)
+        $http.post("/category/delete", {
+            categoryId : id
+        }).then(function(response) {
+            $scope.getData();
+            console.log(response)
         });
     }
 

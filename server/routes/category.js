@@ -1,5 +1,5 @@
-var express = require('express');
-var router = express.Router();
+var express = require('express'),
+    router = express.Router();
 
 //Models
 var Product = require('../models/product'),
@@ -7,7 +7,6 @@ var Product = require('../models/product'),
 
 //Create category
 router.post("/create", function(req, res) {
-    console.log(req.body);
 
     var category = new Category({
         name: req.body.name,
@@ -16,35 +15,28 @@ router.post("/create", function(req, res) {
     });
 
     category.save(function (err) {
-        if(err) {
-            console.log(err);
-            res.send(err);
-        }
+        if(err) res.send(err);
         res.json(category);
     });
 });
 
 //Remove category
 router.post("/delete", function(req, res) {
-    console.log(req.body);
     Category.find({_id : req.body.categoryId}, function(err, result) {
+        if(err) throw new Error(err);
+        res.send("removing", result);
     }).remove().exec();
-    res.send("attemped to remove " + req.body.id);
 });
-
 
 //Query Products by Category
 router.get("/:category/products", function(req, res) {
     Product.find({category : req.params.category}, function(err, products) {
-        if(err) {
-            console.log(err);
-            res.send("Error finding products in category " + req.params.category);
-        }
+        if(err) throw new Error(err);
         res.send(products);
     })
 });
 
-//Get all Categories
+//Get all categories and products
 router.get("/all", function(req, res) {
     return Category.find({}).exec(function(err, categories) {
         if(err) throw new Error(err);

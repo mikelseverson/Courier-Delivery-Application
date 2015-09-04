@@ -4,10 +4,10 @@ var mongoose = require('mongoose'),
 var Productschema = new Schema({
     category : String,
     name : String,
-    img_src : String,
+    img_src : { type: String, default: "https://alicarnold.files.wordpress.com/2009/11/new-product.jpg" },
     desc : String,
     price : Number,
-    url_slug : String
+    url_slug : { type: String, required: true, index: { unique: true } }
 });
 
 Productschema.pre('save', function (next) {

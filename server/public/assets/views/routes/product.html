@@ -6,7 +6,7 @@
         <md-card flex-gt-md="30">
             <md-toolbar>
                 <div class="md-toolbar-tools">
-                    <h2 class="md-flex">{{productData.name}} <span style="text-align: right;">{{productData.price | currency}}</span></h2>
+                    <h2 class="md-flex">{{productData.name}} <span class="align-right">{{productData.price | currency}}</span></h2>
                 </div>
             </md-toolbar>
             <md-card-content>
@@ -27,6 +27,7 @@
 
 
     <div layout="column" layout-gt-md="row" ng-controller="QuoteController">
+
         <!--Delivery Card-->
         <md-card flex-gt-md="50">
             <md-toolbar>
@@ -46,7 +47,7 @@
                 </md-input-container>
                 <md-input-container>
                     <md-icon md-svg-src="/assets/images/ic_phone_24px.svg"></md-icon>
-                    <input ng-model="delivery.phone_number" type="text" placeholder="Phone Number" >
+                    <input ng-model="delivery.phone_number" type="number" placeholder="Phone Number" ng-minlength="10" >
                 </md-input-container>
                 <md-input-container>
                     <md-icon md-svg-src="/assets/images/notes_24px.svg"></md-icon>
@@ -55,6 +56,7 @@
             </md-card-content>
         </md-card>
 
+        <!--Checkout card-->
         <md-card flex-gt-md>
             <md-toolbar>
                 <div class="md-toolbar-tools">
