@@ -144,8 +144,12 @@ myApp.controller('AdminController', ['$scope', '$http', 'uiGmapGoogleMapApi', fu
                 name : $scope.newCategory,
                 url  : $scope.urlSlug
             }).then(function(response) {
-                console.log(response);
-                $scope.categories.push(response.data);
+                if(response.data.errmsg == undefined) {
+                    $scope.categories.push(response.data);
+                }
+                else {
+                    console.log(response.data.errmsg);
+                }
             });
         }
     };
