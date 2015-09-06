@@ -19,7 +19,6 @@ myApp.controller('ProductController', ['$scope', '$routeParams', function($scope
             })
         }
     })
-
 }]);
 
 myApp.controller("QuoteController", ["$scope", "$http", function($scope, $http) {
@@ -32,7 +31,7 @@ myApp.controller("QuoteController", ["$scope", "$http", function($scope, $http) 
             $scope.quote = response.data;
             $scope.quote.fee /= 100;
         })
-    }
+    };
 
     $scope.sendOrder = function(quoteID) {
         $http.post("/postmates/create", {
@@ -79,6 +78,7 @@ myApp.controller('AdminController', ['$scope', '$http', 'uiGmapGoogleMapApi', fu
 
         });
     };
+    $scope.getPostmatesDeliveries();
 
     $scope.postmatesExampleOrder = function() {
         $http.post("/postmates/query", {
@@ -98,8 +98,6 @@ myApp.controller('AdminController', ['$scope', '$http', 'uiGmapGoogleMapApi', fu
         })
     };
 
-    $scope.getPostmatesDeliveries();
-
     $scope.map = {
         center: {latitude: 44.9778, longitude: -93.2650}, zoom: 12, options: {
             panControl    : false,
@@ -111,21 +109,12 @@ myApp.controller('AdminController', ['$scope', '$http', 'uiGmapGoogleMapApi', fu
             streetViewControl: false
         }
     };
-
     $scope.markers = [];
 
-    uiGmapGoogleMapApi.then(function(maps) {
-        console.log(maps);
-    });
-
-    $scope.selectCategory = function(chip) {
-        $scope.categoryId = chip._id;
-    };
-
     $scope.createProduct = function() {
-        if($scope.categoryId != null && $scope.url_slug != undefined && $scope.price != undefined) {
+        if($scope.category.id != null && $scope.url_slug != undefined && $scope.price != undefined) {
             $http.post("/product/create", {
-                category : $scope.categoryId,
+                categoryId : $scope.category.id,
                 desc : $scope.description,
                 price : $scope.price,
                 name : $scope.name,
@@ -146,6 +135,7 @@ myApp.controller('AdminController', ['$scope', '$http', 'uiGmapGoogleMapApi', fu
             }).then(function(response) {
                 if(response.data.errmsg == undefined) {
                     $scope.categories.push(response.data);
+                    $scope.getData();
                 }
                 else {
                     console.log(response.data.errmsg);
@@ -161,6 +151,28 @@ myApp.controller('AdminController', ['$scope', '$http', 'uiGmapGoogleMapApi', fu
             $scope.getData();
             console.log(response)
         });
+    }
+
+    $scope.deleteProduct = function(categoryId, productId) {
+        $http.post("/product/delete", {
+            categoryId : categoryId,
+            productId : productId
+        }).then(function(response) {
+            $scope.getData();
+            console.log(response)
+        });
+    }
+
+    $scope.remove = function(category, product ) {
+        if(category && product) {
+            $http.post("/product/delete", {
+                categoryId : category.id,
+                productId : product.id
+            }).then(function(response) {
+                $scope.getData();
+                console.log(response)
+            });
+        }
     }
 
 }]);

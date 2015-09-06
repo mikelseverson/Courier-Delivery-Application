@@ -1,23 +1,39 @@
-var express = require('express');
-var router = express.Router();
+var express = require('express'),
+    router = express.Router();
 
 //Models
 var Product = require('../models/product'),
     Category = require('../models/category');
 
-//Create new product and add to category
+//Add a product to category
 router.post("/create", function(req, res) {
     var product = new Product(req.body);
-    product.save(function (err) {
-        if(err) console.log(err.message);
-        else {
-            Category.findByIdAndUpdate(req.body.category, { $push: { "products" : product}},
-                { safe: true, upsert: true}, function(err, cat){
-                    console.log(err);
-                    console.log(cat);
-                });
+    Category.findByIdAndUpdate(req.body.categoryId, { $push: { "products" : product}},
+        { safe: true, upsert: true}, function(err, category){
+            if(err) {
+                console.log("error creating product", err);
+                res.send(err);
+            }
+            else {
+                res.send("Product successfully added.")
+            }
+        });
+});
+
+//Delete a product inside a category
+router.post("/delete", function(req, res) {
+    console.log(req.body);
+    Category.update({ _id : req.body.categoryId },
+        { products : { $pull : { $elemMatch : { _id : req.body.productId }}}}, function(err, category) {
+        if(err) {
+            console.log(err);
+            res.send(err);
         }
-    });
+         else {
+            console.log(category);
+            res.send("done");
+        }
+    })
 });
 
 //Query individual Product information

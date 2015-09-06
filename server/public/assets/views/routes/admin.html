@@ -128,16 +128,30 @@
             <md-card>
                 <md-toolbar>
                     <div class="md-toolbar-tools">
-                        <h2 class="md-flex">Delete Category</h2>
+                        <h2 class="md-flex">Remove</h2>
                     </div>
                 </md-toolbar>
                 <md-card-content>
-                    <md-chips ng-model="categories" readonly="true">
-                        <md-chip-template ng-click="selectCategory($chip)" ng-class="{'chip-active' : $chip._id == categoryId}">
-                            {{$chip.name}}
-                        </md-chip-template>
-                    </md-chips>
-                    <div class="button raised" ng-click="deleteCategory(categoryId)">
+
+                    <md-input-container>
+                        <label>Category</label>
+                        <md-select name="categories" ng-model="category" required>
+                            <md-option ng-repeat="category in categories" ng-value="{id : category._id, index : $index}">{{category.name}}</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container>
+                        <label>Product</label>
+                        <md-select name="categories" ng-model="product" required>
+                            <md-option ng-value="{ id : 'all' }">All products</md-option>
+                            <md-option ng-repeat="product in categories[category.index].products" ng-value="{ id : product._id }">{{product.name}}</md-option>
+                        </md-select>
+                        <div class="errors" ng-messages="myForm.myModel.$error" ng-if="myForm.$dirty">
+                            <div ng-message="required">Required</div>
+                        </div>
+                    </md-input-container>
+
+                    <div class="button raised" ng-click="remove(category, product )">
                         <div class="center" fit>Remove</div>
                         <paper-ripple fit></paper-ripple>
                     </div>

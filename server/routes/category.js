@@ -28,7 +28,7 @@ router.post("/delete", function(req, res) {
     }).remove().exec();
 });
 
-//Query Products by Category
+//Query for all products inside a category
 router.get("/:category/products", function(req, res) {
     Product.find({category : req.params.category}, function(err, products) {
         if(err) throw new Error(err);
@@ -36,7 +36,7 @@ router.get("/:category/products", function(req, res) {
     })
 });
 
-//Get all categories and products
+//Query all categories and products
 router.get("/all", function(req, res) {
     return Category.find({}).exec(function(err, categories) {
         if(err) throw new Error(err);
