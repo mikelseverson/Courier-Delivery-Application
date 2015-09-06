@@ -6,19 +6,23 @@ var Product = require('../models/product'),
     Category = require('../models/category');
 
 //Create new product and add to category
+
 router.post("/create", function(req, res) {
-    var product = new Product(req.body);
-    product.save(function (err) {
-        if(err) console.log(err.message);
-        else {
-            Category.findByIdAndUpdate(req.body.category, { $push: { "products" : product}},
-                { safe: true, upsert: true}, function(err, cat){
-                    console.log(err);
-                    console.log(cat);
-                });
-        }
+
+    Category.findById(req.body.category, function(err, category) {
+        category.products.push(req.body);
+        category.save(function (err) {
+            if (err) {
+                console.log(err);
+                res.send(err)
+            }
+            console.log('Success!');
+            res.send(category)
+        });
     });
 });
+
+
 
 //Query individual Product information
 router.get("/:productId", function(req, res) {
