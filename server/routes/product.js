@@ -12,9 +12,8 @@ router.post("/create", function(req, res) {
         category.save(function (err) {
             if (err) {
                 console.log(err);
-                res.send(err)
+                res.status(400).send(err)
             }
-            console.log('Success!');
             res.send(category)
         });
     });
@@ -22,28 +21,36 @@ router.post("/create", function(req, res) {
 
 //Delete product
 router.post("/delete", function(req, res) {
-    Category.findById(req.body.categoryId, function(err, category) {
-        var doc = category.products.id(req.body.productId).remove();
-        console.log(doc);
-        category.save(function (err) {
-            if (err) {
-                console.log(err);
-                res.send(err)
+    if(req.body.productId == undefined) {
+        res.status(400).send("ERROR: No product selected")
+    }
+    else if(req.body.categoryId == undefined) {
+        res.status(400).send("ERROR: No category selected")
+    }
+    else {
+        Category.findById(req.body.categoryId, function(err, category) {
+            if(category == null) {
+                res.status(400).send("Category not found");
             }
-            console.log('the sub-doc was removed');
-            res.send("removed", doc);
+            category.products.id(req.body.productId).remove();
+            category.save(function (err) {
+                if (err) {
+                    console.log(err);
+                    res.status(400).send(err)
+                }
+                res.send("removed");
+            });
         });
-    });
-
+    }
 });
 
 
 //Query individual Product information
 router.get("/:productId", function(req, res) {
-    Product.find({_id : req.params.productId}, function(err, product) {
+    Product.findById(req.params.productId, function(err, product) {
         if(err) {
-            res.send(err);
             console.log(err);
+            res.send(err);
         }
         res.send(product);
     })

@@ -7,7 +7,7 @@ var Productschema = new Schema({
     img_src : { type: String, default: "https://alicarnold.files.wordpress.com/2009/11/new-product.jpg" },
     desc : String,
     price : Number,
-    url_slug : { type: String, required: true, index: { unique: true } }
+    url_slug : String
 });
 
 Productschema.pre('save', function (next) {

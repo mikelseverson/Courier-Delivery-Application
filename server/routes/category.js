@@ -7,16 +7,13 @@ var Product = require('../models/product'),
 
 //Create category
 router.post("/create", function(req, res) {
-    console.log(req.body);
     var category = new Category({
         name: req.body.name,
-        url: req.body.url,
-        products: []
+        url: req.body.url
     });
-
     category.save(function (err) {
         if(err) res.send(err);
-        res.json(category);
+        res.send(category);
     });
 });
 
@@ -40,7 +37,7 @@ router.get("/:category/products", function(req, res) {
 router.get("/all", function(req, res) {
     return Category.find({}).exec(function(err, categories) {
         if(err) throw new Error(err);
-        res.json(categories);
+        res.send(categories);
     })
 });
 
