@@ -59,6 +59,20 @@ myApp.controller('UserController', ['$scope', '$http', function($scope, $http) {
 
 myApp.controller('AdminController', ['$scope', '$http', function($scope, $http) {
 
+    $scope.map = {
+        center: {latitude: 44.9778, longitude: -93.2650},
+        zoom: 12,
+        options: {
+            panControl       : false,
+            zoomControl      : false,
+            scaleControl     : false,
+            mapTypeControl   : false,
+            draggable        : false,
+            scrollwheel      : false,
+            streetViewControl: false
+        }
+    };
+
     $scope.getPostmatesDeliveries = function() {
         $scope.markers = [];
         $http.get("/postmates/deliveries").then(function(res) {
@@ -82,7 +96,6 @@ myApp.controller('AdminController', ['$scope', '$http', function($scope, $http) 
 
     $scope.getPostmatesDeliveries();
 
-
     $scope.postmatesExampleOrder = function() {
         $http.post("/postmates/query", {
             dropoff_address: "1750 Hennepin Ave Minneapolis, MN 55403"
@@ -99,20 +112,6 @@ myApp.controller('AdminController', ['$scope', '$http', function($scope, $http) 
                 console.log(response.data);
             })
         })
-    };
-
-    $scope.map = {
-        center: {latitude: 44.9778, longitude: -93.2650},
-        zoom: 12,
-        options: {
-            panControl       : false,
-            zoomControl      : false,
-            scaleControl     : false,
-            mapTypeControl   : false,
-            draggable        : false,
-            scrollwheel      : false,
-            streetViewControl: false
-        }
     };
 
     $scope.createProduct = function() {
