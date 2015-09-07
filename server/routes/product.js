@@ -5,7 +5,7 @@ var router = express.Router();
 var Product = require('../models/product'),
     Category = require('../models/category');
 
-//Create new product and add to category
+//Create new product
 
 router.post("/create", function(req, res) {
 
@@ -21,6 +21,22 @@ router.post("/create", function(req, res) {
         });
     });
 });
+
+//Delete product
+
+router.post("/delete", function(req, res) {
+    Category.findById(req.body.categoryId, function(err, category) {
+        var doc = category.products.id(req.body.productId).remove();
+        console.log(doc);
+        category.save(function (err) {
+            if (err) return handleError(err);
+            console.log('the sub-doc was removed');
+            res.send("removed", doc);
+        });
+    });
+
+});
+
 
 
 

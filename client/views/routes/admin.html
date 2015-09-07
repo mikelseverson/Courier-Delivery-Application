@@ -132,13 +132,24 @@
                     </div>
                 </md-toolbar>
                 <md-card-content>
-                    <md-chips ng-model="categories" readonly="true">
-                        <md-chip-template ng-click="selectCategory($chip)" ng-class="{'chip-active' : $chip._id == categoryId}">
-                            {{$chip.name}}
-                        </md-chip-template>
-                    </md-chips>
-                    <div class="button raised" ng-click="deleteCategory(categoryId)">
-                        <div class="center" fit>Remove</div>
+                    <md-input-container>
+                        <label>Category</label>
+                        <md-select name="categories" ng-model="deleteCategoryForm" required>
+                            <md-option ng-repeat="category in categories" ng-value="{id : category._id, index : $index }">{{category.name}}</md-option>
+                        </md-select>
+                    </md-input-container>
+                    <md-input-container>
+                        <label>Product</label>
+                        <md-select name="products" ng-model="deleteProductForm" required>
+                            <md-option ng-repeat="product in categories[deleteCategoryForm.index].products" ng-value="{id : product._id, index : $index }">{{product.name}}</md-option>
+                        </md-select>
+                    </md-input-container>
+                    <div class="button raised" ng-click="deleteCategory(deleteCategoryForm.id)">
+                        <div class="center" fit>Remove Category</div>
+                        <paper-ripple fit></paper-ripple>
+                    </div>
+                    <div class="button raised" ng-click="deleteProduct(deleteCategoryForm.id, deleteProductForm.id)">
+                        <div class="center" fit>Remove Product</div>
                         <paper-ripple fit></paper-ripple>
                     </div>
                 </md-card-content>

@@ -118,10 +118,6 @@ myApp.controller('AdminController', ['$scope', '$http', 'uiGmapGoogleMapApi', fu
         console.log(maps);
     });
 
-    $scope.selectCategory = function(chip) {
-        $scope.categoryId = chip._id;
-    };
-
     $scope.createProduct = function() {
         if($scope.categoryId != null && $scope.url_slug != undefined && $scope.price != undefined) {
             $http.post("/product/create", {
@@ -154,13 +150,23 @@ myApp.controller('AdminController', ['$scope', '$http', 'uiGmapGoogleMapApi', fu
         }
     };
 
-    $scope.deleteCategory = function(id) {
+    $scope.deleteCategory = function(categoryId) {
         $http.post("/category/delete", {
-            categoryId : id
+            categoryId : categoryId
         }).then(function(response) {
             $scope.getData();
-            console.log(response)
+            console.log(response);
         });
+    }
+
+    $scope.deleteProduct = function(categoryId, productId) {
+        $http.post("/product/delete", {
+            categoryId : categoryId,
+            productId : productId
+        }).then(function(response) {
+            $scope.getData();
+            console.log(response);
+        })
     }
 
 }]);
