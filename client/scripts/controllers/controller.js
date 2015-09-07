@@ -134,11 +134,18 @@ myApp.controller('AdminController', ['$scope', '$http', 'uiGmapGoogleMapApi', fu
         }
     };
 
-    $scope.createCategory = function() {
-        if($scope.newCategory != undefined && $scope.urlSlug != undefined) {
+    $scope.createCategory = function(categoryName, URLSlug) {
+        console.log(categoryName, URLSlug)
+        if(categoryName == null) {
+            console.log("no category name");
+        }
+        else if(URLSlug == null) {
+            console.log("no category name");
+        }
+        else {
             $http.post("/category/create", {
-                name : $scope.newCategory,
-                url  : $scope.urlSlug
+                name : categoryName,
+                url  : URLSlug
             }).then(function(response) {
                 if(response.data.errmsg == undefined) {
                     $scope.categories.push(response.data);

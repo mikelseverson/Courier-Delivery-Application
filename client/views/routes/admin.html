@@ -111,24 +111,24 @@
                 <md-card-content>
                     <md-input-container>
                         <label>Category</label>
-                        <input type="text" ng-model="newCategory">
+                        <input type="text" ng-model="newCategory.name">
                     </md-input-container>
                     <md-input-container>
                         <label>URL slug</label>
-                        <input type="text" ng-model="urlSlug">
+                        <input type="text" ng-model="newCategory.slug">
                     </md-input-container>
-                    <div class="button raised" ng-click="createCategory()">
+                    <div class="button raised" ng-click="createCategory(newCategory.name, newCategory.slug)">
                         <div class="center" fit>Create</div>
                         <paper-ripple fit></paper-ripple>
                     </div>
                 </md-card-content>
             </md-card>
 
-            <!--Delete Category Card-->
+            <!--Delete Card-->
             <md-card>
                 <md-toolbar>
                     <div class="md-toolbar-tools">
-                        <h2 class="md-flex">Delete Category</h2>
+                        <h2 class="md-flex">Delete</h2>
                     </div>
                 </md-toolbar>
                 <md-card-content>

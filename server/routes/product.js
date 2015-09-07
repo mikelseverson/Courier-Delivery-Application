@@ -6,9 +6,7 @@ var Product = require('../models/product'),
     Category = require('../models/category');
 
 //Create new product
-
 router.post("/create", function(req, res) {
-
     Category.findById(req.body.category, function(err, category) {
         category.products.push(req.body);
         category.save(function (err) {
@@ -23,21 +21,21 @@ router.post("/create", function(req, res) {
 });
 
 //Delete product
-
 router.post("/delete", function(req, res) {
     Category.findById(req.body.categoryId, function(err, category) {
         var doc = category.products.id(req.body.productId).remove();
         console.log(doc);
         category.save(function (err) {
-            if (err) return handleError(err);
+            if (err) {
+                console.log(err);
+                res.send(err)
+            }
             console.log('the sub-doc was removed');
             res.send("removed", doc);
         });
     });
 
 });
-
-
 
 
 //Query individual Product information

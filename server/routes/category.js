@@ -7,7 +7,7 @@ var Product = require('../models/product'),
 
 //Create category
 router.post("/create", function(req, res) {
-
+    console.log(req.body);
     var category = new Category({
         name: req.body.name,
         url: req.body.url,
