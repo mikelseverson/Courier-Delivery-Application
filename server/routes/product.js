@@ -32,14 +32,16 @@ router.post("/delete", function(req, res) {
             if(category == null) {
                 res.status(400).send("Category not found");
             }
-            category.products.id(req.body.productId).remove();
-            category.save(function (err) {
-                if (err) {
-                    console.log(err);
-                    res.status(400).send(err)
-                }
-                res.send("removed");
-            });
+            else {
+                category.products.id(req.body.productId).remove();
+                category.save(function (err) {
+                    if (err) {
+                        console.log(err);
+                        res.status(400).send(err)
+                    }
+                    res.send("removed");
+                });
+            }
         });
     }
 });

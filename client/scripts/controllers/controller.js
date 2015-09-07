@@ -57,7 +57,7 @@ myApp.controller('UserController', ['$scope', '$http', function($scope, $http) {
     })
 }]);
 
-myApp.controller('AdminController', ['$scope', '$http', 'uiGmapGoogleMapApi', function($scope, $http, uiGmapGoogleMapApi) {
+myApp.controller('AdminController', ['$scope', '$http', function($scope, $http) {
 
     $scope.getPostmatesDeliveries = function() {
         $scope.markers = [];
@@ -80,6 +80,9 @@ myApp.controller('AdminController', ['$scope', '$http', 'uiGmapGoogleMapApi', fu
         });
     };
 
+    $scope.getPostmatesDeliveries();
+
+
     $scope.postmatesExampleOrder = function() {
         $http.post("/postmates/query", {
             dropoff_address: "1750 Hennepin Ave Minneapolis, MN 55403"
@@ -98,25 +101,19 @@ myApp.controller('AdminController', ['$scope', '$http', 'uiGmapGoogleMapApi', fu
         })
     };
 
-    $scope.getPostmatesDeliveries();
-
     $scope.map = {
-        center: {latitude: 44.9778, longitude: -93.2650}, zoom: 12, options: {
-            panControl    : false,
-            zoomControl   : false,
-            scaleControl  : false,
-            mapTypeControl: false,
-            draggable: false,
-            scrollwheel: false,
+        center: {latitude: 44.9778, longitude: -93.2650},
+        zoom: 12,
+        options: {
+            panControl       : false,
+            zoomControl      : false,
+            scaleControl     : false,
+            mapTypeControl   : false,
+            draggable        : false,
+            scrollwheel      : false,
             streetViewControl: false
         }
     };
-
-    $scope.markers = [];
-
-    uiGmapGoogleMapApi.then(function(maps) {
-        console.log(maps);
-    });
 
     $scope.createProduct = function() {
         if($scope.categoryId != null && $scope.url_slug != undefined && $scope.price != undefined) {
@@ -135,12 +132,11 @@ myApp.controller('AdminController', ['$scope', '$http', 'uiGmapGoogleMapApi', fu
     };
 
     $scope.createCategory = function(categoryName, URLSlug) {
-        console.log(categoryName, URLSlug)
         if(categoryName == null) {
             console.log("no category name");
         }
         else if(URLSlug == null) {
-            console.log("no category name");
+            console.log("no url slug");
         }
         else {
             $http.post("/category/create", {

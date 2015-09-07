@@ -280,13 +280,6 @@ md-content.md-default-theme {
 .no-padding {
     padding: 0;
 }
-md-chips .md-chips {
-    box-shadow: none;
-}
-
-.chip-active {
-    text-decoration: underline;
-}
 
 .align-right {
     position: absolute;

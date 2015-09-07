@@ -41,14 +41,13 @@ myApp.controller("AppCtrl", ["$scope", "$mdSidenav","$http", function($scope, $m
     $scope.toggleSidenav = function (a) {
         $mdSidenav(a).toggle()
     };
-    //This call updates store data as needed
+    //update store data as needed
     $scope.getData = function() {
         $http.get("/category/all").then(function (res) {
             console.log(res.data);
             $scope.categories = res.data;
         });
     };
-
 
     //This is the initial call for the store product data
     $http.get("/category/all").then(function (res) {
