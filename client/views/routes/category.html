@@ -1,14 +1,12 @@
 <div class="md-padding center">
-    <md-card ng-repeat="product in products" class="card">
+    <md-card ng-repeat="product in products" ng-click="categoryClick(category, product.url_slug)" class="card">
         <md-toolbar>
             <div class="md-toolbar-tools">
                 <h2 class="md-flex">{{product.name}}</h2>
             </div>
         </md-toolbar>
-        <md-card-content style="padding: 0px;">
-            <a ng-href="#/{{category}}/{{product.url_slug}}">
-                <img ng-src="{{product.img_src}}">
-            </a>
+        <md-card-content class="no-padding">
+            <img ng-src="{{product.img_src}}">
         </md-card-content>
     </md-card>
 </div>

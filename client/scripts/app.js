@@ -1,5 +1,4 @@
-var myApp = angular.module('YourMarket', ['ngMaterial', 'ngRoute', 'appControllers', 'uiGmapgoogle-maps']);
-var appControllers = angular.module('appControllers', []);
+var myApp = angular.module('YourMarket', ['ngMaterial', 'ngRoute', 'uiGmapgoogle-maps']);
 
 myApp.config(['$routeProvider', 'uiGmapGoogleMapApiProvider', function($routeProvider, uiGmapGoogleMapApiProvider){
 
@@ -11,14 +10,13 @@ myApp.config(['$routeProvider', 'uiGmapGoogleMapApiProvider', function($routePro
         when('/home', {
             templateUrl: "/assets/views/routes/home.html"
         }).
-        when('/about', {
-            templateUrl: "/assets/views/routes/about.html"
-        }).
         when('/login', {
-            templateUrl: "/assets/views/routes/login.html"
+            templateUrl: "/assets/views/routes/login.html",
+            controller: 'LoginController'
         }).
-        when('/register', {
-            templateUrl: "/assets/views/routes/register.html"
+        when('/user', {
+            templateUrl: "/assets/views/routes/user.html",
+            controller: 'UserController'
         }).
         when('/admin', {
             templateUrl: "/assets/views/routes/admin.html",
@@ -37,11 +35,23 @@ myApp.config(['$routeProvider', 'uiGmapGoogleMapApiProvider', function($routePro
         })
 }]);
 
-myApp.controller("AppCtrl", ["$scope", "$mdSidenav","$http", function($scope, $mdSidenav, $http) {
+myApp.controller("AppCtrl", ["$scope", "$mdSidenav", "$http", "Auth",  "$location", function($scope, $mdSidenav, $http, Auth, $location) {
     $scope.toggleSidenav = function (a) {
         $mdSidenav(a).toggle()
     };
-    //update store data as needed
+
+    $scope.$watch(Auth.isLoggedIn, function (value, oldValue) {
+        if (!value && oldValue) {
+            console.log("Disconnect");
+            $scope.user = {};
+            $location.path('/login');
+        }
+        if (value) {
+            $scope.user = value;
+        }
+    }, true);
+
+    //Update store data
     $scope.getData = function() {
         $http.get("/category/all").then(function (res) {
             console.log(res.data);
@@ -49,9 +59,19 @@ myApp.controller("AppCtrl", ["$scope", "$mdSidenav","$http", function($scope, $m
         });
     };
 
-    //This is the initial call for the store product data
-    $http.get("/category/all").then(function (res) {
-        console.log("received store data", res.data);
-        $scope.categories = res.data;
-    });
+    $scope.getData();
 }]);
+
+//Handles client side user object
+myApp.factory('Auth', function(){
+    var user;
+
+    return {
+        setUser : function(aUser){
+            user = aUser;
+        },
+        isLoggedIn : function(){
+            return(user) ? user : false;
+        }
+    }
+});

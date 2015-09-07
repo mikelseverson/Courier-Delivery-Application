@@ -9,14 +9,13 @@
         <link rel="stylesheet" href="/vendors/angular-material/angular-material.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
         <link rel="stylesheet" href="/assets/styles/style.css">
-        <link href='https://api.mapbox.com/mapbox.js/v2.2.1/mapbox.css' rel='stylesheet' />
     </head>
 
     <body layout="column" class="md-default-theme" ng-controller="AppCtrl">
         <md-toolbar class="md-whiteframe-z2" hide-gt-sm>
             <div class="md-toolbar-tools">
                 <md-button ng-click="toggleSidenav('left')" class="md-icon-button">
-                    <md-icon aria-label="Menu" md-svg-icon="https://s3-us-west-2.amazonaws.com/s.cdpn.io/68133/menu.svg"></md-icon>
+                    <md-icon aria-label="Menu" md-svg-icon="/assets/images/menu.svg"></md-icon>
                 </md-button>
                 <h1 class="md-flex">Store Front</h1>
             </div>
@@ -31,10 +30,12 @@
                 <div ng-repeat="category in categories">
                     <a ng-click="toggleSidenav('left')" ng-href="#/{{category.url}}"><h1 class="md-title test">{{category.name}}</h1></a>
                 </div>
-                <a ng-click="toggleSidenav('left')" href="#about"><h1 class="md-title">About</h1></a>
-                <a ng-click="toggleSidenav('left')" href="#admin"><h1 class="md-title">Admin</h1></a>
-            </md-sidenav>
+                <a ng-if="!user" ng-click="toggleSidenav('left')" href="#login"><h1 class="md-title">Login</h1></a>
+                <a ng-if="user" ng-click="toggleSidenav('left')" href="#user"><h1 class="md-title">User</h1></a>
+                <a ng-if="user.admin" ng-click="toggleSidenav('left')" href="#admin"><h1 class="md-title">Admin</h1></a>
+                <a ng-if="user" ng-click="toggleSidenav('left')" href="/logout"><h1 class="md-title">Logout</h1></a>
 
+            </md-sidenav>
             <!--View-->
             <div layout="column" flex id="content">
                 <md-content ng-view md-scroll-y flex md-padding class="md-default-theme ng-scope"></md-content>
@@ -49,7 +50,7 @@
         <script type="text/javascript" src="/vendors/angular-route/angular-route.min.js"></script>
         <script type="text/javascript" src="/assets/scripts/app.min.js"></script>
         <script type="text/javascript" src="/assets/scripts/controllers/controller.min.js"></script>
-        <script src='/vendors/angular-google-maps/lodash.min.js'></script>
-        <script src='/vendors/angular-google-maps/angular-google-maps.min.js'></script>
+        <script type="text/javascript" src='/vendors/angular-google-maps/lodash.min.js'></script>
+        <script type="text/javascript" src='/vendors/angular-google-maps/angular-google-maps.min.js'></script>
     </body>
 </html>

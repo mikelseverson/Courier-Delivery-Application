@@ -1,25 +1,47 @@
 <div class="md-padding">
-    <md-card>
-        <md-toolbar>
-            <div class="md-toolbar-tools">
-                <h2 class="md-flex">Login</h2>
-            </div>
-        </md-toolbar>
-        <md-card-content>
-            <form action="/login" method="post">
-                <div>
-                    <label for="username">Username:</label>
-                    <input type="text" name="username" id="username"/>
+    <div layout="column" layout-gt-md="row">
+        <md-card flex-gt-md>
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <h2 class="md-flex">Login</h2>
                 </div>
-                <div>
-                    <label for="password">Password:</label>
-                    <input type="password" name="password" id="password"/>
+            </md-toolbar>
+            <md-card-content>
+                <md-input-container>
+                    <label>Username</label>
+                    <input type="text" ng-model="loginInput.username">
+                </md-input-container>
+                <md-input-container>
+                    <label>Password</label>
+                    <input type="password" ng-model="loginInput.password">
+                </md-input-container>
+                <div class="button raised" ng-click="login(loginInput.username, loginInput.password)">
+                    <div class="center" fit>Login</div>
+                    <paper-ripple fit></paper-ripple>
                 </div>
-                <div>
-                    <input type="submit" value="Login"/>
-                    <a href="#register">Register</a>
+            </md-card-content>
+        </md-card>
+
+        <md-card flex-gt-md>
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <h2 class="md-flex">Register</h2>
                 </div>
-            </form>
-        </md-card-content>
-    </md-card>
+            </md-toolbar>
+            <md-card-content>
+                <md-input-container>
+                    <label>Username</label>
+                    <input type="text" ng-model="registerInput.username">
+                </md-input-container>
+                <md-input-container>
+                    <label>Password</label>
+                    <input type="password" ng-model="registerInput.password">
+                </md-input-container>
+                <div class="button raised" ng-click="register(registerInput.username, registerInput.password)">
+                    <div class="center" fit>Register</div>
+                    <paper-ripple fit></paper-ripple>
+                </div>
+            </md-card-content>
+        </md-card>
+    </div>
 </div>

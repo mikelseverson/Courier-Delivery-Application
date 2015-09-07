@@ -8,19 +8,29 @@ var router = express.Router();
 var Users = require('../models/user');
 
 //Vendor Log in
-router.post('/login', passport.authenticate('local', {
-        successRedirect: '/#/admin',
-        failureRedirect: '/'
-    })
+router.post('/login', passport.authenticate('local'),
+    function(req, res) {
+        res.send(req.user);
+    }
 );
+
+router.get('/logout', function(req, res){
+    req.logout();
+    res.redirect('/');
+});
 
 //Vendor Register
 router.post('/register', function(req, res, next) {
-    console.log("New Registration:", req.body);
-    Users.create(req.body, function (err, post) {
+    console.log("New Registration:", req.body.username);
+    Users.create(req.body, function (err, user) {
         if (err) next(err);
-        else res.redirect('/');
+        else res.send(user);
     })
+});
+
+//Get user info
+router.get('/user', function(req, res) {
+    res.send(req.isAuthenticated());
 });
 
 //Catch-all
