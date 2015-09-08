@@ -10,9 +10,4 @@ var Productschema = new Schema({
     url_slug : String
 });
 
-Productschema.pre('save', function (next) {
-   console.log("presave init");
-    next();
-});
-
 module.exports = mongoose.model("Product", Productschema);

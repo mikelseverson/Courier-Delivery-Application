@@ -19,7 +19,41 @@ myApp.controller('LoginController', ['$location', '$scope', '$http', 'Auth', fun
 }]);
 
 myApp.controller('UserController', ['$scope', '$http', 'Auth', '$location', function($scope, $http, Auth, $location) {
-    if(!$scope.user) {
-        $location.path('/')
+    console.log($scope.user);
+    if(!$scope.user) $location.path('/');
+    else {
+        $scope.map = {
+            center: {latitude: 44.9778, longitude: -93.2650},
+            zoom: 12,
+            options: {
+                panControl       : false,
+                zoomControl      : false,
+                scaleControl     : false,
+                mapTypeControl   : false,
+                draggable        : false,
+                scrollwheel      : false,
+                streetViewControl: false
+            }
+        };
+        $scope.markers = [];
+        angular.forEach($scope.user.orders, function(order, index) {
+            console.log(order.deliveryObject);
+            if(!order.deliveryObject.complete) {
+                $http.post("/postmates/update", order), function(req,res) {
+                    console.log(res);
+                }
+                if(order.deliveryObject.courier) {
+                    $scope.markers.push({
+                        id: index,
+                        coords: {
+                            latitude: order.deliveryObject.delivery.courier.location.lat,
+                            longitude: order.deliveryObject.delivery.courier.location.lng
+                        }
+                    })
+
+                }
+            }
+        });
+
     }
 }]);

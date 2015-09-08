@@ -2,11 +2,14 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     bcrypt = require('bcrypt'),
     SALT_WORK_FACTOR = 10;
+var Product = require('./product')
+
 
 var UserSchema = new Schema({
     username: { type: String, required: true, index: { unique: true } },
     password: { type: String, required: true },
-    admin: Boolean
+    admin: { type: Boolean, default: false },
+    orders: [Product.schema]
 });
 
 UserSchema.pre('save', function(next) {

@@ -37,24 +37,22 @@ myApp.controller("QuoteController", ["$scope", "$http", function($scope, $http) 
         $http.post("/postmates/query", {
             dropoff_address: $scope.delivery.destination
         }).then(function(response) {
-            console.log(response.data);
-            $scope.quote = response.data;
+            $scope.order = response.data;
+            $scope.quote = $scope.order.quoteObject;
             $scope.quote.fee /= 100;
         })
     };
 
-    $scope.sendOrder = function(quoteID) {
-        $http.post("/postmates/create", {
-            quote : quoteID,
-            dropoff_address: $scope.delivery.destination,
-            dropoff_phone_number: $scope.delivery.phone_number,
-            dropoff_name: $scope.delivery.dropoff_name,
-            dropoff_business_name: $scope.dropoff_business_name,
-            dropoff_notes: $scope.dropoff_notes })
+    $scope.sendOrder = function(order, dropoffName,dropoffPhoneNumber, dropoffNotes, dropoffBusinessName) {
+        order.dropoff_phone_number = dropoffPhoneNumber;
+        order.dropoff_name = dropoffName;
+        order.dropoff_business_name = dropoffBusinessName;
+        order.dropof_notes = dropoffNotes;
+        $http.post("/postmates/create", order)
             .then(function(response) {
                 $scope.orderDetails = response.data;
                 console.log(response.data);
+
             })
-    }
-}
-]);
+    };
+}]);

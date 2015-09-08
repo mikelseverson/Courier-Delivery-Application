@@ -36,10 +36,9 @@ myApp.config(['$routeProvider', 'uiGmapGoogleMapApiProvider', function($routePro
 }]);
 
 myApp.controller("AppCtrl", ["$scope", "$mdSidenav", "$http", "Auth",  "$location", function($scope, $mdSidenav, $http, Auth, $location) {
-    $scope.toggleSidenav = function (a) {
-        $mdSidenav(a).toggle()
+    $scope.toggleSidenav = function (nav) {
+        $mdSidenav(nav).toggle()
     };
-
     $scope.$watch(Auth.isLoggedIn, function (value, oldValue) {
         if (!value && oldValue) {
             console.log("Disconnect");
@@ -65,7 +64,6 @@ myApp.controller("AppCtrl", ["$scope", "$mdSidenav", "$http", "Auth",  "$locatio
 //Handles client side user object
 myApp.factory('Auth', function(){
     var user;
-
     return {
         setUser : function(aUser){
             user = aUser;

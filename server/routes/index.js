@@ -7,30 +7,26 @@ var router = express.Router();
 //Models
 var Users = require('../models/user');
 
-//Vendor Log in
+//Login
 router.post('/login', passport.authenticate('local'),
     function(req, res) {
         res.send(req.user);
     }
 );
 
+//Logout
 router.get('/logout', function(req, res){
     req.logout();
     res.redirect('/');
 });
 
-//Vendor Register
+//Register
 router.post('/register', function(req, res, next) {
     console.log("New Registration:", req.body.username);
     Users.create(req.body, function (err, user) {
         if (err) next(err);
         else res.send(user);
     })
-});
-
-//Get user info
-router.get('/user', function(req, res) {
-    res.send(req.isAuthenticated());
 });
 
 //Catch-all
