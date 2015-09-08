@@ -7,29 +7,36 @@ var Product = require('../models/product'),
 
 //Create category
 router.post("/create", function(req, res) {
-    var category = new Category({
-        name: req.body.name,
-        url: req.body.url
-    });
-    category.save(function (err) {
-        if(err) res.send(err);
-        res.send(category);
-    });
+    if(req.isAuthenticated()) {
+        var category = new Category({
+            name: req.body.name,
+            url: req.body.url
+        });
+        category.save(function (err) {
+            if(err) res.send(err);
+            res.send(category);
+        });
+    }
 });
 
 //Remove category
 router.post("/delete", function(req, res) {
-    Category.find({_id : req.body.categoryId}, function(err, result) {
-        if(err) throw new Error(err);
-    }).remove(function(err) {
-        if(err) {
-            console.log(err);
-            res.send(err);
-        }
-        else {
-            res.send("success");
-        }
-    }).exec();
+    if(req.isAuthenticated()) {
+        Category.find({_id : req.body.categoryId}, function(err, result) {
+            if(err) throw new Error(err);
+        }).remove(function(err) {
+            if(err) {
+                console.log(err);
+                res.send(err);
+            }
+            else {
+                res.send("success");
+            }
+        }).exec();
+    }
+    else {
+        res.send("You must be authenticated to delete a category")
+    }
 });
 
 //Query Products by Category
