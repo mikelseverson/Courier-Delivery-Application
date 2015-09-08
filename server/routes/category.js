@@ -21,8 +21,14 @@ router.post("/create", function(req, res) {
 router.post("/delete", function(req, res) {
     Category.find({_id : req.body.categoryId}, function(err, result) {
         if(err) throw new Error(err);
-    }).remove(function() {
-        res.send("removing");
+    }).remove(function(err) {
+        if(err) {
+            console.log(err);
+            res.send(err);
+        }
+        else {
+            res.send("success");
+        }
     }).exec();
 });
 
