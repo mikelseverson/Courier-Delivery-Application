@@ -97,7 +97,8 @@ myApp.controller('AdminController', ['$scope', '$http', function($scope, $http) 
                 url  : URLSlug
             }).then(function(response) {
                 if(response.data.errmsg == undefined) {
-                    $scope.categories.push(response.data);
+                    $scope.getData();
+
                 }
                 else {
                     console.log(response.data.errmsg);

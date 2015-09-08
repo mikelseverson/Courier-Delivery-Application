@@ -21,8 +21,8 @@ router.post("/create", function(req, res) {
 router.post("/delete", function(req, res) {
     Category.find({_id : req.body.categoryId}, function(err, result) {
         if(err) throw new Error(err);
-        res.send("removing", result);
     }).remove().exec();
+    res.send("removing", result);
 });
 
 //Query Products by Category
