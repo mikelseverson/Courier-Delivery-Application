@@ -22,9 +22,7 @@ router.post("/create", function(req, res) {
 //Remove category
 router.post("/delete", function(req, res) {
     if(req.isAuthenticated()) {
-        Category.find({_id : req.body.categoryId}, function(err, result) {
-            if(err) throw new Error(err);
-        }).remove(function(err) {
+        Category.findById(req.body.categoryId).remove(function(err) {
             if(err) {
                 console.log(err);
                 res.send(err);
@@ -32,7 +30,7 @@ router.post("/delete", function(req, res) {
             else {
                 res.send("success");
             }
-        }).exec();
+        })
     }
     else {
         res.send("You must be authenticated to delete a category")
@@ -49,7 +47,9 @@ router.get("/:category/products", function(req, res) {
 
 //Get all categories and products
 router.get("/all", function(req, res) {
-    return Category.find({}).exec(function(err, categories) {
+    return Category.find({}) //Grabs all categories
+        .populate('products') //Builds products inside found categories
+        .exec(function(err, categories) {
         if(err) throw new Error(err);
         res.send(categories);
     })

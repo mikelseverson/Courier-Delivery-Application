@@ -9,16 +9,22 @@ var Product = require('../models/product'),
 router.post("/create", function(req, res) {
     if(req.isAuthenticated()) {
         Category.findById(req.body.category, function(err, category) {
-            category.products.push(req.body);
-            category.save(function (err) {
-                if (err) {
-                    console.log(err);
-                    res.status(400).send(err)
+            var newProduct = new Product({
+                _category: category._id,
+                desc: req.body.desc,
+                price: req.body.price,
+                name: req.body.name,
+                url_slug: req.body.url_slug
+            });
+            newProduct.save(function (err) {
+                if (err) console.log(err);
+                else {
+                    category.products.push(newProduct);
+                    category.save();
+                    res.send(newProduct);
                 }
-                res.send(category)
             });
         });
-
     }
     else {
         res.send("You must be authenticated to create a product");
@@ -29,28 +35,17 @@ router.post("/create", function(req, res) {
 router.post("/delete", function(req, res) {
     if(req.isAuthenticated()) {
         if(req.body.productId == undefined) {
-            res.status(400).send("ERROR: No product selected")
+            res.status(400).send("ERROR: No product in post request")
         }
         else if(req.body.categoryId == undefined) {
-            res.status(400).send("ERROR: No category selected")
+            res.status(400).send("ERROR: No category in post request")
         }
-        else {
-            Category.findById(req.body.categoryId, function(err, category) {
-                if(category == null) {
-                    res.status(400).send("Category not found");
-                }
-                else {
-                    category.products.id(req.body.productId).remove();
-                    category.save(function (err) {
-                        if (err) {
-                            console.log(err);
-                            res.status(400).send(err)
-                        }
-                        res.send("removed");
-                    });
-                }
-            });
-        }
+        Product.findById(req.body.productId).remove(function(err) {
+            if(err) console.log(err);
+            else {
+                res.send("deleted");
+            }
+        });
     }
     else {
         res.send("ERROR: You are not authenticated!");
