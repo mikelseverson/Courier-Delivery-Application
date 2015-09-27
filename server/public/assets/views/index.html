@@ -29,11 +29,11 @@
                 <md-button ng-repeat="category in categories" ng-click="toggleSidenav('left')" ng-href="#/{{category.url}}" class="md-primary">
                     {{category.name}}</md-button>
                 <md-button ng-if="!user" ng-click="toggleSidenav('left')" href="#login" class="md-primary">
-                   Login</md-button>
+                   Login / Register</md-button>
                 <md-button ng-if="user" ng-click="toggleSidenav('left')" href="#user" class="md-primary">
                     User</md-button>
                 <md-button ng-click="toggleSidenav('left')" href="#admin" class="md-primary">
-                    Admin</md-button>
+                    Admin Panel</md-button>
                 <md-button ng-if="user" ng-click="toggleSidenav('left')" href="/logout" class="md-primary">
                     Logout</md-button>
             </md-sidenav>
