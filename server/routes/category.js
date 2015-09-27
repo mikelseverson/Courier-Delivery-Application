@@ -17,6 +17,9 @@ router.post("/create", function(req, res) {
             res.send(category);
         });
     }
+    else {
+        res.status(401).send("You must be authenticated to create a category");
+    }
 });
 
 //Remove category
@@ -28,12 +31,12 @@ router.post("/delete", function(req, res) {
                 res.send(err);
             }
             else {
-                res.send("success");
+                res.send("Product Deleted");
             }
         })
     }
     else {
-        res.send("You must be authenticated to delete a category")
+        res.status(401).send("You must be authenticated to delete a category")
     }
 });
 

@@ -1,9 +1,9 @@
 var express = require('express'),
     path = require('path'),
-    Postmates = require('postmates');
+    Postmates = require('postmates'),
+    router = express.Router();
 
 var postmates = new Postmates('cus_KKTBUzym9jC16k', '6854a484-6226-43b8-ab7f-0890841bee0a');
-var router = express.Router();
 
 //Query Postmates for delivery quote
 router.post("/query", function(request, response) {

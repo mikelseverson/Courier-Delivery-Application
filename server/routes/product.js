@@ -27,7 +27,7 @@ router.post("/create", function(req, res) {
         });
     }
     else {
-        res.send("You must be authenticated to create a product");
+        res.status(401).send("You must be authenticated to create a product");
     }
 });
 
@@ -42,13 +42,11 @@ router.post("/delete", function(req, res) {
         }
         Product.findById(req.body.productId).remove(function(err) {
             if(err) console.log(err);
-            else {
-                res.send("deleted");
-            }
+            else res.send("deleted");
         });
     }
     else {
-        res.send("ERROR: You are not authenticated!");
+        res.status(401).send("ERROR: You are not authenticated!");
     }
 });
 
