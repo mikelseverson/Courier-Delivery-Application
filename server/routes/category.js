@@ -44,7 +44,8 @@ router.post("/delete", function(req, res) {
 router.get("/:category/products", function(req, res) {
     Product.find({category : req.params.category}, function(err, products) {
         if(err) throw new Error(err);
-        res.send(products);
+        if(!products) res.status(404).send("No products found in this category");
+        else res.send(products);
     })
 });
 
