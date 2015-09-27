@@ -3,44 +3,24 @@
         <md-card flex-gt-md>
             <md-toolbar>
                 <div class="md-toolbar-tools">
-                    <h2 class="md-flex">Login</h2>
+                    <h2 class="md-flex">Login or Register</h2>
                 </div>
             </md-toolbar>
             <md-card-content>
                 <md-input-container>
                     <label>Username</label>
-                    <input type="text" ng-model="loginInput.username">
+                    <input type="text" ng-model="input.username">
                 </md-input-container>
                 <md-input-container>
                     <label>Password</label>
-                    <input type="password" ng-model="loginInput.password">
+                    <input type="password" ng-model="input.password">
                 </md-input-container>
-                <div class="button raised" ng-click="login(loginInput.username, loginInput.password)">
-                    <div class="center" fit>Login</div>
-                    <paper-ripple fit></paper-ripple>
-                </div>
-            </md-card-content>
-        </md-card>
-
-        <md-card flex-gt-md>
-            <md-toolbar>
-                <div class="md-toolbar-tools">
-                    <h2 class="md-flex">Register</h2>
-                </div>
-            </md-toolbar>
-            <md-card-content>
-                <md-input-container>
-                    <label>Username</label>
-                    <input type="text" ng-model="registerInput.username">
-                </md-input-container>
-                <md-input-container>
-                    <label>Password</label>
-                    <input type="password" ng-model="registerInput.password">
-                </md-input-container>
-                <div class="button raised" ng-click="register(registerInput.username, registerInput.password)">
-                    <div class="center" fit>Register</div>
-                    <paper-ripple fit></paper-ripple>
-                </div>
+                <md-button ng-click="login(input.username, input.password)" class="md-raised">
+                    Login
+                </md-button>
+                <md-button ng-click="register(input.username, input.password)" class="md-raised">
+                    Register
+                </md-button>
             </md-card-content>
         </md-card>
     </div>

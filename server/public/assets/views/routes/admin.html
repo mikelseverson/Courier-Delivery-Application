@@ -1,5 +1,19 @@
 <div class="md-padding">
 
+    <div layout="column" layout-gt-md="row" ng-if="!user.admin">
+        <md-card flex>
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <h2 class="md-flex">Admin Panel</h2>
+                </div>
+            </md-toolbar>
+            <md-card-content>
+                <p>You are not currently logged in as an admin.</p>
+            </md-card-content>
+        </md-card>
+    </div>
+
+
     <div layout="column" layout-gt-lg="row">
         <!--Map Card-->
         <md-card flex-gt-lg="70">
@@ -26,9 +40,8 @@
                 </div>
             </md-toolbar>
 
-            <!--Todo: Figure our the most relevant information to display then implement on click view more information-->
-            <md-card-content style="padding-bottom: 0px;">
-                <md-list style="padding-bottom: 0px;">
+            <md-card-content class="no-padding-bottom">
+                <md-list class="no-padding-bottom">
                     <md-list-item class="md-3-line" ng-repeat="delivery in delivery.data" ng-if="$index < 7">
                         <img ng-if="delivery.courier.img_href != undefined" ng-src="{{delivery.courier.img_href}}" alt="image of {{delivery.courier.name}}" class="md-avatar">
                         <div class="md-list-item-text">
@@ -91,10 +104,11 @@
                     <label>Price</label>
                     <input type="number" ng-model="price">
                 </md-input-container>
-                <div class="button raised" ng-click="createProduct()">
-                    <div class="center" fit>Create</div>
-                    <paper-ripple fit></paper-ripple>
-                </div>
+
+                <md-button ng-click="createProduct()" ng-disabled="!user.admin" class="md-raised">
+                    Create Product
+                </md-button>
+
             </md-card-content>
         </md-card>
 
@@ -117,41 +131,44 @@
                         <label>URL slug</label>
                         <input type="text" ng-model="newCategory.slug">
                     </md-input-container>
-                    <div class="button raised" ng-click="createCategory(newCategory.name, newCategory.slug)">
-                        <div class="center" fit>Create</div>
-                        <paper-ripple fit></paper-ripple>
-                    </div>
+                    <md-button ng-click="createCategory(newCategory.name, newCategory.slug)" ng-disabled="!user.admin" class="md-raised">
+                        Create Category
+                    </md-button>
                 </md-card-content>
             </md-card>
 
-            <!--Delete Card-->
+            <!--Remove Card-->
             <md-card>
                 <md-toolbar>
                     <div class="md-toolbar-tools">
-                        <h2 class="md-flex">Delete</h2>
+                        <h2 class="md-flex">Remove</h2>
                     </div>
                 </md-toolbar>
                 <md-card-content>
+
                     <md-input-container>
                         <label>Category</label>
                         <md-select name="categories" ng-model="deleteCategoryForm" required>
-                            <md-option ng-repeat="category in categories" ng-value="{id : category._id, index : $index }">{{category.name}}</md-option>
+                            <md-option ng-repeat="category in categories" ng-value="{id : category._id, index : $index }">
+                                {{category.name}}
+                            </md-option>
                         </md-select>
                     </md-input-container>
+
                     <md-input-container>
                         <label>Product</label>
                         <md-select name="products" ng-model="deleteProductForm" required>
-                            <md-option ng-repeat="product in categories[deleteCategoryForm.index].products" ng-value="{id : product._id, index : $index }">{{product.name}}</md-option>
+                            <md-option ng-repeat="product in categories[deleteCategoryForm.index].products" ng-value="{id : product._id, index : $index }">
+                                {{product.name}}
+                            </md-option>
                         </md-select>
                     </md-input-container>
-                    <div class="button raised" ng-click="deleteCategory(deleteCategoryForm.id)">
-                        <div class="center" fit>Remove Category</div>
-                        <paper-ripple fit></paper-ripple>
-                    </div>
-                    <div class="button raised" ng-click="deleteProduct(deleteCategoryForm.id, deleteProductForm.id)">
-                        <div class="center" fit>Remove Product</div>
-                        <paper-ripple fit></paper-ripple>
-                    </div>
+                        <md-button ng-click="deleteCategory(deleteCategoryForm.id)" ng-disabled="!user.admin" class="md-raised">
+                            Remove Category
+                        </md-button>
+                        <md-button ng-click="deleteProduct(deleteCategoryForm.id, deleteProductForm.id)" ng-disabled="!user.admin" class="md-raised">
+                            Remove Product
+                        </md-button>
                 </md-card-content>
             </md-card>
         </div>

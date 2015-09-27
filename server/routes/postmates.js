@@ -20,11 +20,11 @@ router.post("/create", function(req, res) {
     postmates.new({
         manifest: "a box of kittens",
 
-        pickup_name: "The Store",
+        pickup_name: "Truecost Farms",
         pickup_address: "310 Hennepin Ave E, Minneapolis, MN 55414",
         pickup_phone_number: "000-000-0000",
-        //pickup_business_name: "Business Name",
-        //pickup_notes: "Optional note that this is Invoice #123",
+        //pickup_business_name: "",
+        //pickup_notes: "",
 
         dropoff_name: req.body.dropoff_name,
         dropoff_address: req.body.dropoff_address,

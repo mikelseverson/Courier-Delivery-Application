@@ -7,7 +7,7 @@ myApp.controller('CategoryController', ['$scope', '$routeParams', '$location', f
         if(category.url == $scope.category) {
             $scope.products = category.products
         }
-    })
+    });
 
     $scope.categoryClick = function(category, product) {
         console.log(category, product);
@@ -52,8 +52,13 @@ myApp.controller("QuoteController", ["$scope", "$http", function($scope, $http) 
             dropoff_business_name: $scope.dropoff_business_name,
             dropoff_notes: $scope.dropoff_notes })
             .then(function(response) {
-                $scope.orderDetails = response.data;
-                console.log(response.data);
+                if(response.status != 200) {
+                    console.log("error");
+                }
+                else {
+                    $scope.orderDetails = response.data;
+                    console.log(response.data);
+                }
             })
     }
 }

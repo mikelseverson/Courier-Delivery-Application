@@ -281,6 +281,10 @@ md-content.md-default-theme {
     padding: 0;
 }
 
+.no-padding-bottom {
+    padding-bottom: 0;
+}
+
 .align-right {
     position: absolute;
     top: 20px;
