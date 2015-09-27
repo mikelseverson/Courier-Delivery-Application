@@ -4,7 +4,8 @@ body {
 }
 
 md-sidenav {
-    padding-left: 20px;
+    padding-left: 0px;
+    text-align: center;
     width: 200px;
     max-width: 200px;
     min-width: 200px;
