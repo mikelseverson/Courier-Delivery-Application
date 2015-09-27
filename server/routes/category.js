@@ -45,7 +45,7 @@ router.get("/:category/products", function(req, res) {
     Product.find({category : req.params.category}, function(err, products) {
         if(err) throw new Error(err);
         if(!products) res.status(404).send("No products found in this category");
-        else res.send(products);
+        else res.send(products)
     })
 });
 
