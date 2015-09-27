@@ -55,7 +55,7 @@ myApp.controller("AppCtrl", ["$scope", "$mdSidenav", "$http", "Auth",  "$locatio
     //Update store data
     $scope.getData = function() {
         $http.get("/category/all").then(function (res) {
-            console.log(res.data);
+            console.log(res.data.storeData);
             $scope.categories = res.data.storeData;
             Auth.setUser(res.data.userObject)
         });
