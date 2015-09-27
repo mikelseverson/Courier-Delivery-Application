@@ -43,7 +43,7 @@ myApp.controller("AppCtrl", ["$scope", "$mdSidenav", "$http", "Auth",  "$locatio
 
     $scope.$watch(Auth.isLoggedIn, function (value, oldValue) {
         if (!value && oldValue) {
-            console.log("Disconnect");
+            console.log("Disconnected");
             $scope.user = {};
             $location.path('/login');
         }
