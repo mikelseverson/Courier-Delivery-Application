@@ -27,6 +27,7 @@ myApp.controller('AdminController', ['$scope', '$http', 'Auth', function($scope,
                 if(delivery.courier != null) {
                     $scope.markers.push({
                         id: index,
+                        icon : "assets/images/car.png",
                         coords: {
                             latitude: delivery.courier.location.lat,
                             longitude: delivery.courier.location.lng
