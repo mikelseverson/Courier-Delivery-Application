@@ -40,6 +40,7 @@ myApp.controller("AppCtrl", ["$scope", "$mdSidenav", "$http", "Auth",  "$locatio
         $mdSidenav(a).toggle()
     };
 
+
     $scope.$watch(Auth.isLoggedIn, function (value, oldValue) {
         if (!value && oldValue) {
             console.log("Disconnect");
@@ -55,7 +56,8 @@ myApp.controller("AppCtrl", ["$scope", "$mdSidenav", "$http", "Auth",  "$locatio
     $scope.getData = function() {
         $http.get("/category/all").then(function (res) {
             console.log(res.data);
-            $scope.categories = res.data;
+            $scope.categories = res.data.categories;
+            Auth.setUser(res.data.userObject)
         });
     };
 
@@ -65,7 +67,6 @@ myApp.controller("AppCtrl", ["$scope", "$mdSidenav", "$http", "Auth",  "$locatio
 //Handles client side user object
 myApp.factory('Auth', function(){
     var user;
-
     return {
         setUser : function(aUser){
             user = aUser;

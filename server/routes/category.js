@@ -54,7 +54,7 @@ router.get("/all", function(req, res) {
         .populate('products') //Builds products inside found categories
         .exec(function(err, categories) {
         if(err) throw new Error(err);
-        res.send(categories);
+        res.send({storeData : categories, userObject : req.user});
     })
 });
 

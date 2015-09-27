@@ -1,7 +1,7 @@
 /**
  * Created by mikelseverson on 9/7/15.
  */
-myApp.controller('AdminController', ['$scope', '$http', function($scope, $http) {
+myApp.controller('AdminController', ['$scope', '$http', 'Auth', function($scope, $http, Auth) {
 
     $scope.map = {
         center: {latitude: 44.9778, longitude: -93.2650},
@@ -111,9 +111,12 @@ myApp.controller('AdminController', ['$scope', '$http', function($scope, $http) 
         $http.post("/category/delete", {
             categoryId : categoryId
         }).then(function(response) {
+            if(response.status != '200') {
+
+            }
             $scope.getData();
             console.log(response);
         });
-    }
+    };
 
 }]);

@@ -5,7 +5,7 @@ var Category = require('./product');
 var Productschema = new Schema({
     _category : { type: Schema.ObjectId, ref: 'Category' },
     name : String,
-    img_src : { type: String, default: "https://alicarnold.files.wordpress.com/2009/11/new-product.jpg" },
+    img_src : { type: String, default: "assets/images/stock-image.png" },
     desc : String,
     price : Number,
     url_slug : String

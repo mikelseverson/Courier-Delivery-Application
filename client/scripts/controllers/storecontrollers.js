@@ -8,13 +8,11 @@ myApp.controller('CategoryController', ['$scope', '$routeParams', '$location', f
             $scope.products = category.products
         }
     });
-
     $scope.categoryClick = function(category, product) {
         console.log(category, product);
         $location.path('/' + category + '/' + product);
 
     }
-
 }]);
 
 myApp.controller('ProductController', ['$scope', '$routeParams', function($scope, $routeParams) {
@@ -32,7 +30,6 @@ myApp.controller('ProductController', ['$scope', '$routeParams', function($scope
 }]);
 
 myApp.controller("QuoteController", ["$scope", "$http", function($scope, $http) {
-
     $scope.getQuote = function() {
         $http.post("/postmates/query", {
             dropoff_address: $scope.delivery.destination
