@@ -11,6 +11,8 @@
     </head>
 
     <body layout="column" class="md-default-theme" ng-controller="AppCtrl">
+
+        <!--Mobile Navigation Bar-->
         <md-toolbar class="md-whiteframe-z2" hide-gt-sm>
             <div class="md-toolbar-tools">
                 <md-button ng-click="toggleSidenav('left')" class="md-icon-button">
@@ -29,9 +31,9 @@
                 <md-button ng-repeat="category in categories" ng-click="toggleSidenav('left')" ng-href="#/{{category.url}}" class="md-primary">
                     {{category.name}}</md-button>
                 <md-button ng-if="!user" ng-click="toggleSidenav('left')" href="#login" class="md-primary">
-                   Login / Register</md-button>
+                    Login / Register</md-button>
                 <md-button ng-if="user" ng-click="toggleSidenav('left')" href="#user" class="md-primary">
-                    User</md-button>
+                    User Panel</md-button>
                 <md-button ng-click="toggleSidenav('left')" href="#admin" class="md-primary">
                     Admin Panel</md-button>
                 <md-button ng-if="user" ng-click="toggleSidenav('left')" href="/logout" class="md-primary">
