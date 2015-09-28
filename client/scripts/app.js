@@ -40,7 +40,7 @@ myApp.controller("AppCtrl", ["$scope", "$mdSidenav", "$http", "Auth",  "$locatio
         $mdSidenav(a).toggle()
     };
 
-
+    //Watch for authentication change
     $scope.$watch(Auth.isLoggedIn, function (value, oldValue) {
         if (!value && oldValue) {
             console.log("Disconnected");
@@ -55,12 +55,10 @@ myApp.controller("AppCtrl", ["$scope", "$mdSidenav", "$http", "Auth",  "$locatio
     //Update store data
     $scope.getData = function() {
         $http.get("/category/all").then(function (res) {
-            console.log(res.data.storeData);
             $scope.categories = res.data.storeData;
             Auth.setUser(res.data.userObject)
         });
     };
-
     $scope.getData();
 }]);
 
