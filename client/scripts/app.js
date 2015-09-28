@@ -35,10 +35,16 @@ myApp.config(['$routeProvider', 'uiGmapGoogleMapApiProvider', function($routePro
         })
 }]);
 
-myApp.controller("AppCtrl", ["$scope", "$mdSidenav", "$http", "Auth",  "$location", function($scope, $mdSidenav, $http, Auth, $location) {
-    $scope.toggleSidenav = function (a) {
-        $mdSidenav(a).toggle()
-    };
+myApp.controller("AppCtrl", ["$scope", "$mdSidenav", "$mdUtil", "$http", "Auth",  "$location", function($scope, $mdSidenav, $mdUtil, $http, Auth, $location) {
+
+    $scope.toggleSidenav = buildToggler('left');
+    function buildToggler(navID) {
+        var debounceFn =  $mdUtil.debounce(function(){
+            $mdSidenav(navID)
+                .toggle();
+        },200);
+        return debounceFn;
+    }
 
     //Watch for authentication change
     $scope.$watch(Auth.isLoggedIn, function (value, oldValue) {
