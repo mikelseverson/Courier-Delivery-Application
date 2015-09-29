@@ -14,6 +14,7 @@ router.post("/create", function(req, res) {
                 desc: req.body.desc,
                 price: req.body.price,
                 name: req.body.name,
+                img_url: req.body.img_url,
                 url_slug: req.body.url_slug
             });
             newProduct.save(function (err) {
